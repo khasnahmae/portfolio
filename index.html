@@ -4,6 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo.png" />
+    <meta property="og:title" content="Khasnah | UI/UX Designer" />
+    <meta
+      property="og:description"
+      content="Portfolio UI/UX Designer dengan fokus pada pengalaman pengguna yang intuitif"
+    />
+    <meta
+      property="og:image"
+      content="https://khasnah-portfolio.vercel.app/images/preview.png"
+    />
+    <meta property="og:url" content="https://khasnah-portfolio.vercel.app" />
+    <meta property="og:type" content="website" />
     <title>Khasnah Maesaroh — UX/UI Designer & Web Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -367,7 +378,7 @@
         font-size: var(--fs-hero);
         font-weight: 800;
         line-height: 0.92;
-        letter-spacing: -0.04em;
+        letter-spacing: 0.01em;
         margin-bottom: 1.5rem;
       }
       .hero-name em {
@@ -684,7 +695,7 @@
         font-size: var(--fs-h1);
         font-weight: 800;
         line-height: 1.1;
-        letter-spacing: -0.03em;
+        letter-spacing: -0.01em;
         margin-bottom: 1.5rem;
       }
       .section-title em {
@@ -868,7 +879,7 @@
         font-size: clamp(3rem, 7vw, 6rem);
         font-weight: 800;
         line-height: 0.95;
-        letter-spacing: -0.04em;
+        letter-spacing: -0.02em;
         margin-bottom: 2rem;
       }
       .contact-heading span {
@@ -964,6 +975,22 @@
       .reveal-delay-3 {
         transition-delay: 300ms;
       }
+      .project-label {
+        font-size: var(--fs-xs);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .project-label::before {
+        content: "";
+        width: 24px;
+        height: 1.5px;
+        background: var(--c-accent);
+      }
 
       /* =====================
       RESPONSIVE
@@ -997,7 +1024,7 @@
           font-size: var(--fs-h1);
           font-weight: 800;
           line-height: 1.1;
-          letter-spacing: -0.03em;
+          letter-spacing: -0.01em;
           margin-bottom: 1.5rem;
         }
         .section-title em {
@@ -1015,7 +1042,7 @@
           font-size: var(--fs-h1);
           font-weight: 800;
           line-height: 1.1;
-          letter-spacing: 0.01em;
+          letter-spacing: -0.01em;
           margin-bottom: 1.5rem;
         }
         .section-title em {
@@ -1033,7 +1060,7 @@
           font-size: var(--fs-hero);
           font-weight: 800;
           line-height: 0.92;
-          letter-spacing: -0.04em;
+          letter-spacing: -0.02em;
           margin-bottom: 1.5rem;
         }
         .hero-name em {
@@ -1046,7 +1073,7 @@
           font-size: var(--fs-h1);
           font-weight: 800;
           line-height: 1;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.01em;
           margin-bottom: 1.5rem;
         }
         .section-title em {
@@ -1077,7 +1104,7 @@
           font-size: var(--fs-hero);
           font-weight: 800;
           line-height: 0.92;
-          letter-spacing: -0.04em;
+          letter-spacing: -0.02em;
           margin-bottom: 1.5rem;
         }
         .hero-name em {
@@ -1090,7 +1117,7 @@
           font-size: var(--fs-h1);
           font-weight: 800;
           line-height: 1;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.01em;
           margin-bottom: 1.5rem;
         }
         .section-title em {
@@ -1120,7 +1147,7 @@
           font-size: var(--fs-hero);
           font-weight: 800;
           line-height: 0.92;
-          letter-spacing: -0.04em;
+          letter-spacing: -0.02em;
           margin-bottom: 1.5rem;
         }
         .hero-name em {
@@ -1160,6 +1187,30 @@
         }
         .about-text {
           text-align: center;
+        }
+        .contact-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .contact-heading {
+          text-align: center;
+        }
+        .contact-sub {
+          text-align: center;
+        }
+        .contact-footer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .contact-socials {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 16px;
         }
         .about-skills-title {
           text-align: center;
@@ -1216,6 +1267,30 @@
         .about-text {
           text-align: center;
         }
+        .contact-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .contact-heading {
+          text-align: center;
+        }
+        .contact-sub {
+          text-align: center;
+        }
+        .contact-footer {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .contact-socials {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 16px;
+        }
         .about-skills-title {
           text-align: center;
         }
@@ -1240,21 +1315,7 @@
         padding-block: 6rem;
       }
       .project-label {
-        font-size: var(--fs-xs);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--c-muted);
-        margin-bottom: 1rem;
-        display: flex;
-        align-items: center;
         justify-content: center;
-        gap: 8px;
-      }
-      .project-label::before {
-        content: "";
-        width: 24px;
-        height: 1.5px;
-        background: var(--c-accent);
       }
       .content__hero {
         display: flex;
@@ -1277,7 +1338,7 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 2rem;
+        gap: 3rem;
         height: auto;
       }
 
@@ -1291,7 +1352,7 @@
       }
 
       .features__image {
-        flex: 1 1 45%;
+        flex: 1 1 40%;
         position: relative;
       }
 
@@ -1599,88 +1660,21 @@
             </h2>
             <p class="features__description gs_reveal">
               <span class="t-en">
-                Designed an end-to-end digital platform for PT Uniteda Arkato.
-                <br />
-                Enabling industrial buyers and sellers to list, search, <br />
-                and transact heavy equipment through <br />
-                intuitive flows and a scalable design system.</span
+                Designed an end-to-end <br />digital platform for PT Uniteda
+                Arkato. <br />
+                Enabling industrial buyers and sellers to <br />
+                list, search, and transact heavy <br />equipment through
+                intuitive flows and a <br />
+                scalable design system.</span
               >
               <span class="t-id"
-                >Mendesain platform digital end-to-end untuk PT Uniteda Arkato
-                <br />
-                memungkinkan pembeli dan penjual industri untuk <br />
-                mendaftarkan, mencari, dan melakukan transaksi peralatan berat
-                <br />
-                melalui alur yang intuitif dan sistem desain yang dapat
-                diskalakan.</span
-              >
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
-        >
-          <div class="features__image">
-            <div class="features__card">
-              <img class="features__img" src="images/pos.png" alt="" />
-            </div>
-          </div>
-          <div class="features__content">
-            <div class="project-type">
-              <div class="project-type-dot gs-reveal"></div>
-              <span class="t-en">FULL-STACK DEVELOPMENT</span
-              ><span class="t-id">PENGEMBANGAN FULL-STACK</span>
-            </div>
-            <h2 class="features__title gs_reveal">
-              <span class="t-en">Custom Point of Sales</span>
-              <span class="t-id">Point of Sales Kustom</span>
-            </h2>
-            <p class="features__description gs_reveal">
-              <span class="t-en">
-                PoS for transaction management, <br />
-                inventory tracking, and automated sales reports <br />
-                using Laravel, MySQL, Bootstrap, and jQuery.</span
-              >
-              <span class="t-id"
-                >PoS untuk manajemen transaksi, <br />
-                pelacakan inventaris, dan laporan penjualan otomatis <br />
-                menggunakan Laravel, MySQL, ootstrap, dan jQuery.</span
-              >
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="features__item features__item--left gs_reveal gs_reveal_fromLeft"
-        >
-          <div class="features__image">
-            <div class="features__card">
-              <img class="features__img" src="images/ptsp.png" alt="" />
-            </div>
-          </div>
-          <div class="features__content">
-            <div class="project-type">
-              <div class="project-type-dot gs-reveal"></div>
-              <span class="t-en">UI/UX DESIGN</span
-              ><span class="t-id">DESAIN UI/UX</span>
-            </div>
-            <h2 class="features__title gs_reveal">
-              <span class="t-en">Website Redesign</span>
-              <span class="t-id">Mendesain Ulang Website</span>
-            </h2>
-            <p class="features__description gs_reveal">
-              <span class="t-en">
-                Reimagined the public-facing portal for an institution, <br />
-                simplifying service information architecture and
-                <br />
-                crafting a modern, accessible interface for government
-                users.</span
-              >
-              <span class="t-id"
-                >Mendesain ulang portal layanan publik suatu Institusi, <br />
-                menyederhanakan arsitektur informasi layanan dan membuat <br />
-                antarmuka yang modern dan dapat diakses untuk masyarakat.</span
+                >Mendesain platform digital end-to-end <br />untuk PT Uniteda
+                Arkato memungkinkan <br />
+                pembeli dan penjual industri untuk <br />
+                mendaftarkan, mencari, dan melakukan <br />transaksi peralatan
+                berat melalui alur <br />
+                yang intuitif dan sistem desain yang <br />
+                dapat diskalakan.</span
               >
             </p>
           </div>
@@ -1701,35 +1695,105 @@
               ><span class="t-id">DESAIN UI/UX</span>
             </div>
             <h2 class="features__title gs_reveal">
-              <span class="t-en"
-                >Library Website <br />
-                UI Design
-              </span>
-              <span class="t-id"
-                >Desain Antarmuka <br />
-                Website Perpustakaan</span
-              >
+              <span class="t-en">Library Website </span>
+              <span class="t-id"> Website Perpustakaan</span>
             </h2>
             <p class="features__description gs_reveal">
               <span class="t-en">
-                Crafted a high-fidelity library management UI for a school,
-                <br />
-                streamlining book search, borrowing, and reservation with a
-                <br />
-                consistent visual style guide and intuitive navigation.</span
+                Crafted a high-fidelity library <br />management UI for a
+                school, streamlining <br />
+                book search, borrowing, and reservation <br />
+                with a consistent visual style guide and <br />intuitive
+                navigation.</span
               >
               <span class="t-id"
-                >Membuat antarmuka pengguna manajemen perpustakaan <br />
-                berkualitas tinggi untuk sebuah sekolah. Mempermudah pencarian,
-                <br />
-                peminjaman, dan reservasi buku dengan panduan <br />
-                gaya visual yang konsisten dan navigasi yang intuitif.</span
+                >Membuat antarmuka pengguna <br />manajemen perpustakaan
+                berkualitas <br />
+                tinggi untuk sebuah sekolah. <br />
+                Mempermudah pencarian, peminjaman, <br />
+                dan reservasi buku dengan panduan gaya <br />
+                visual yang konsisten dan navigasi yang <br />
+                intuitif.</span
               >
             </p>
           </div>
         </div>
 
+        <!-- <div
+          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/pos.png" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">FULL-STACK DEVELOPMENT</span
+              ><span class="t-id">PENGEMBANGAN FULL-STACK</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">Custom Point of Sales</span>
+              <span class="t-id">Point of Sales Kustom</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                PoS for transaction management, inventory tracking, and
+                automated sales reports using Laravel, MySQL, Bootstrap, and
+                jQuery.</span
+              >
+              <span class="t-id"
+                >PoS untuk manajemen transaksi, pelacakan inventaris, dan
+                laporan penjualan otomatis menggunakan Laravel, MySQL, ootstrap,
+                dan jQuery.</span
+              >
+            </p>
+          </div>
+        </div> -->
+
         <div
+          class="features__item features__item--left gs_reveal gs_reveal_fromLeft"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/ptsp.png" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">UI/UX DESIGN</span
+              ><span class="t-id">DESAIN UI/UX</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en"
+                >Public Service <br />
+                Portal</span
+              >
+              <span class="t-id"
+                >Portal Pelayanan <br />
+                Publik</span
+              >
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Reimagined the public-facing portal for <br />an institution,
+                simplifying service <br />information architecture and crafting
+                a <br />
+                modern, accessible interface for <br />government users.</span
+              >
+              <span class="t-id"
+                >Mendesain ulang portal layanan publik <br />suatu Institusi,
+                menyederhanakan <br />arsitektur informasi layanan dan
+                <br />membuat antarmuka yang modern dan <br />
+                mudah diakses oleh masyarakat.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <!-- <div
           class="features__item features__item--left gs_reveal gs_reveal_fromLeft"
         >
           <div class="features__image">
@@ -1750,64 +1814,20 @@
             <p class="features__description gs_reveal">
               <span class="t-en">
                 Digitized internal admin processes at Dinas Kesehatan Kota
-                Tegal,
-                <br />
-                fuel requests, vehicle reservations, monthly reports.</span
+                Tegal, fuel requests, vehicle reservations, monthly
+                reports.</span
               >
               <span class="t-id"
                 >Digitalisasi proses administrasi internal Dinas Kesehatan Kota
-                Tegal,
-                <br />
-                permintaan bahan bakar, reservasi kendaraan dinas, laporan
-                bulanan.</span
-              >
-            </p>
-          </div>
-        </div>
-
-        <!-- <div
-          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
-        >
-          <div class="features__image">
-            <div class="features__card">
-              <img
-                class="features__img"
-                src="https://assets.codepen.io/16327/portrait-image-1.jpg"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="features__content">
-            <div class="project-type">
-              <div class="project-type-dot gs-reveal"></div>
-              <span class="t-en">BACK-END DEVELOPMENT</span
-              ><span class="t-id">PENGEMBANGAN BACK-END</span>
-            </div>
-            <h2 class="features__title gs_reveal">
-              <span class="t-en">INTERNSHIP APP SYSTEM </span>
-              <span class="t-id">SISTEM APLIKASI MAGANG</span>
-            </h2>
-            <p class="features__description gs_reveal">
-              <span class="t-en">
-                Designed a system to facilitate the process of applying for
-                <br />
-                field work practices (praktik kerja lapangan), enabling the
-                <br />
-                entire application process to be conducted online.</span
-              >
-              <span class="t-id"
-                >Merancang sebuah sistem untuk memfasilitasi proses pengajuan
-                <br />
-                praktik kerja lapangan, memungkinkan seluruh proses pengajuan
-                <br />
-                dilakukan secara online.</span
+                Tegal, permintaan bahan bakar, reservasi kendaraan dinas,
+                laporan bulanan.</span
               >
             </p>
           </div>
         </div> -->
 
         <div
-          class="features__item features__item--right gs_reveal gs_reveal_fromLeft"
+          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
         >
           <div class="features__image">
             <div class="features__card">
@@ -1826,28 +1846,28 @@
             </h2>
             <p class="features__description gs_reveal">
               <span class="t-en">
-                Designed wireframes and interactive prototypes for a budgeting
-                <br />
-                and financial planning app, centering user-friendly financial
-                <br />
-                insights, personalized recommendations, and clear data <br />
+                Designed wireframes and interactive <br />prototypes for a
+                budgeting and financial <br />planning app, centering
+                user-friendly <br />
+                financial insights, personalized <br />
+                recommendations, and clear data <br />
                 visualization.</span
               >
               <span class="t-id"
-                >Merancang wireframe dan prototipe interaktif untuk aplikasi
-                <br />
-                penganggaran dan perencanaan keuangan, berfokus pada wawasan
-                <br />
-                keuangan yang ramah pengguna, rekomendasi yang dipersonalisasi,
-                <br />
-                dan visualisasi data yang jelas.</span
+                >Merancang wireframe dan prototipe <br />interaktif untuk
+                aplikasi penganggaran <br />
+                dan perencanaan keuangan, berfokus <br />
+                pada wawasan keuangan yang ramah <br />
+                pengguna, rekomendasi yang <br />dipersonalisasi, dan
+                visualisasi data yang <br />
+                jelas.</span
               >
             </p>
           </div>
         </div>
 
         <div
-          class="features__item features__item--left gs_reveal gs_reveal_fromRight"
+          class="features__item features__item--left gs_reveal gs_reveal_fromLeft"
         >
           <div class="features__image">
             <div class="features__card">
@@ -1861,30 +1881,36 @@
               ><span class="t-id">DESAIN UI/UX</span>
             </div>
             <h2 class="features__title gs_reveal">
-              <span class="t-en">Digital Literacy Platform </span>
-              <span class="t-id">Platform Literasi Digital</span>
+              <span class="t-en"
+                >Digital Literacy <br />
+                Platform
+              </span>
+              <span class="t-id"
+                >Platform Literasi <br />
+                Digital</span
+              >
             </h2>
             <p class="features__description gs_reveal">
               <span class="t-en">
-                Architected information structure and gamification mechanics for
-                <br />
-                a digital literacy app — boosting user engagement through <br />
-                interactive content, achievement loops, and a cohesive visual
-                language.</span
+                Architected information structure and <br />
+                gamification mechanics for a digital <br />
+                literacy app boosting user engagement <br />
+                through interactive content, achievement <br />
+                loops, and a cohesive visual language.</span
               >
               <span class="t-id"
-                >Merancang struktur informasi dan mekanika gamifikasi <br />
-                untuk aplikasi literasi digital, meningkatkan keterlibatan
-                pengguna <br />
-                melalui konten interaktif, siklus pencapaian, <br />
-                dan bahasa visual yang kohesif.</span
+                >Merancang struktur informasi dan <br />mekanika gamifikasi
+                untuk aplikasi literasi <br />
+                digital, meningkatkan keterlibatan <br />pengguna melalui konten
+                interaktif, siklus <br />pencapaian, dan bahasa visual yang
+                <br />kohesif.</span
               >
             </p>
           </div>
         </div>
 
         <div
-          class="features__item features__item--right gs_reveal gs_reveal_fromLeft"
+          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
         >
           <div class="features__image">
             <div class="features__card">
@@ -1898,21 +1924,28 @@
               ><span class="t-id">DESAIN UI/UX</span>
             </div>
             <h2 class="features__title gs_reveal">
-              <span class="t-en">Localezat - Culinary Finder</span>
-              <span class="t-id">Lokalezat - Pencari Kuliner</span>
+              <span class="t-en"
+                >Localezat <br />
+                Culinary Finder</span
+              >
+              <span class="t-id"
+                >Lokalezat <br />
+                Pencari Kuliner</span
+              >
             </h2>
             <p class="features__description gs_reveal">
               <span class="t-en">
-                Conducting UX research and designing UI with interviews and
-                <br />
-                surveys to identify pain points for a <br />
-                local culinary discovery platform prototype.</span
+                Conducting UX research and designing UI <br />with interviews
+                and surveys to identify <br />
+                pain points for a local culinary discovery <br />
+                platform prototype.</span
               >
               <span class="t-id"
-                >Melakukan riset UX dan mendesain UI dengan <br />
-                wawancara dan survei untuk mengidentifikasi pain points pada
-                <br />
-                prototipe platform penemuan kuliner lokal.</span
+                >Melakukan riset UX dan mendesain UI <br />
+                dengan wawancara dan survei untuk <br />mengidentifikasi pain
+                points pada <br />
+                prototipe platform penemuan kuliner <br />
+                lokal.</span
               >
             </p>
           </div>
