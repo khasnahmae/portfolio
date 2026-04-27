@@ -1,0 +1,2278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khasnah Maesaroh — UX/UI Designer & Web Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --c-ink: #0d0d0f;
+        --c-ink-60: rgba(13, 13, 15, 0.6);
+        --c-ink-30: rgba(13, 13, 15, 0.3);
+        --c-ink-10: rgba(13, 13, 15, 0.08);
+        --c-paper: #f5f3ef;
+        --c-white: #ffffff;
+        --c-accent: #00ff00;
+        --c-accent-dim: #37c637;
+        --c-highlight: #1a1a2e;
+        --c-muted: #7a7872;
+        --c-border: rgba(13, 13, 15, 0.12);
+        --c-surface: #edebe6;
+        --font-display: "Syne", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --fs-hero: clamp(3rem, 7vw, 7rem);
+        --fs-h1: clamp(2rem, 4vw, 3.5rem);
+        --fs-h2: clamp(1.5rem, 3vw, 2.25rem);
+        --fs-h3: 1.25rem;
+        --fs-body: 1rem;
+        --fs-small: 0.875rem;
+        --fs-xs: 0.75rem;
+        --space-xs: 0.5rem;
+        --space-sm: 1rem;
+        --space-md: 2rem;
+        --space-lg: 4rem;
+        --space-xl: 8rem;
+        --r-sm: 6px;
+        --r-md: 12px;
+        --r-lg: 24px;
+        --r-xl: 40px;
+        --r-pill: 9999px;
+        --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        --dur-fast: 180ms;
+        --dur-mid: 400ms;
+        --dur-slow: 700ms;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: var(--font-body);
+        background: var(--c-paper);
+        color: var(--c-ink);
+        font-size: var(--fs-body);
+        line-height: 1.6;
+        overflow-x: hidden;
+        cursor: none;
+        opacity: 1;
+        transition: opacity 220ms;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        cursor: none;
+        border: none;
+        background: none;
+        font-family: inherit;
+      }
+
+      /* =====================
+      LANGUAGE SYSTEM
+      ===================== */
+      .t-en,
+      .t-id {
+        display: none;
+      }
+      .lang-en .t-en {
+        display: inline;
+      }
+      .lang-id .t-id {
+        display: inline;
+      }
+      .tb-en,
+      .tb-id {
+        display: none;
+      }
+      .lang-en .tb-en {
+        display: block;
+      }
+      .lang-id .tb-id {
+        display: block;
+      }
+
+      .lang-switcher {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        background: var(--c-ink-10);
+        border-radius: var(--r-pill);
+        padding: 3px;
+        border: 1px solid var(--c-border);
+        flex-shrink: 0;
+      }
+      .lang-btn {
+        padding: 4px 12px;
+        border-radius: var(--r-pill);
+        font-size: var(--fs-xs);
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: var(--c-muted);
+        transition: all var(--dur-fast);
+        cursor: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        line-height: 1.6;
+        white-space: nowrap;
+      }
+      .lang-btn.active {
+        background: var(--c-accent);
+        color: var(--c-ink);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+      }
+      .lang-btn:not(.active):hover {
+        color: var(--c-ink);
+      }
+      .lang-btn img {
+        width: 20px;
+        height: 15px;
+        object-fit: cover;
+        border-radius: 3px;
+        margin-right: 6px;
+      }
+
+      /* =====================
+      CURSOR
+      ===================== */
+      #cursor {
+        position: fixed;
+        width: 12px;
+        height: 12px;
+        background: var(--c-accent);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition:
+          width var(--dur-mid) var(--ease-out),
+          height var(--dur-mid) var(--ease-out);
+        mix-blend-mode: multiply;
+      }
+      #cursor.expand {
+        width: 48px;
+        height: 48px;
+      }
+      #cursor-trail {
+        position: fixed;
+        width: 32px;
+        height: 32px;
+        border: 1.5px solid var(--c-ink-30);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition:
+          left 120ms linear,
+          top 120ms linear;
+      }
+
+      /* =====================
+      LAYOUT
+      ===================== */
+      .container {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+      }
+      .section {
+        padding: var(--space-xl) 0;
+      }
+
+      /* =====================
+      NAV
+      ===================== */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem var(--space-md);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition:
+          background var(--dur-mid),
+          backdrop-filter var(--dur-mid);
+      }
+      nav.scrolled {
+        background: rgba(245, 243, 239, 0.88);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--c-border);
+      }
+      .nav-left {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+      }
+      .nav-logo {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.125rem;
+        letter-spacing: -0.02em;
+      }
+      .nav-logo span {
+        display: inline-block;
+        background: var(--c-accent);
+        color: var(--c-ink);
+        padding: 2px 8px;
+        border-radius: var(--r-sm);
+        margin-left: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        vertical-align: middle;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+        font-size: var(--fs-small);
+        letter-spacing: 0.03em;
+      }
+      .nav-links a {
+        color: var(--c-ink-60);
+        transition: color var(--dur-fast);
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+        background: var(--c-accent);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform var(--dur-mid) var(--ease-out);
+      }
+      .nav-links a:hover {
+        color: var(--c-ink);
+      }
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .nav-cta {
+        background: var(--c-ink);
+        color: var(--c-paper);
+        padding: 0.5rem 1.25rem;
+        border-radius: var(--r-pill);
+        font-size: var(--fs-small);
+        font-weight: 500;
+        transition:
+          background var(--dur-fast),
+          transform var(--dur-fast);
+        white-space: nowrap;
+      }
+      .nav-cta:hover {
+        background: var(--c-accent);
+        color: var(--c-ink);
+      }
+
+      /* =====================
+      HERO
+      ===================== */
+      .hero {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        padding-top: 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-bg-grid {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-image:
+          linear-gradient(var(--c-border) 1px, transparent 1px),
+          linear-gradient(90deg, var(--c-border) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: radial-gradient(
+          ellipse at 50% 0,
+          black 30%,
+          transparent 80%
+        );
+      }
+      .hero-left {
+        text-align: center;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        padding: var(--space-lg) 0 var(--space-lg);
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: var(--fs-xs);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        margin-bottom: 1.5rem;
+      }
+      .hero-eyebrow-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c-accent);
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.4);
+        }
+      }
+      .hero-name {
+        font-family: var(--font-display);
+        font-size: var(--fs-hero);
+        font-weight: 800;
+        line-height: 0.92;
+        letter-spacing: -0.04em;
+        margin-bottom: 1.5rem;
+      }
+      .hero-name em {
+        font-style: normal;
+        color: transparent;
+        -webkit-text-stroke: 2px var(--c-ink);
+      }
+      .hero-desc {
+        font-size: 1.125rem;
+        color: var(--c-ink-60);
+        max-width: 480px;
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--c-ink);
+        color: var(--c-paper);
+        padding: 0.875rem 2rem;
+        border-radius: var(--r-pill);
+        font-size: var(--fs-small);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        transition: all var(--dur-mid) var(--ease-out);
+      }
+      .btn-primary:hover {
+        background: var(--c-accent);
+        color: var(--c-ink);
+        transform: translateY(-2px);
+      }
+      .btn-primary .arrow {
+        display: inline-block;
+        transition: transform var(--dur-mid) var(--ease-out);
+      }
+      .btn-primary:hover .arrow {
+        transform: translate(3px, -3px);
+      }
+      .btn-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1.5px solid var(--c-border);
+        color: var(--c-ink-60);
+        padding: 0.875rem 2rem;
+        border-radius: var(--r-pill);
+        font-size: var(--fs-small);
+        font-weight: 500;
+        transition: all var(--dur-mid) var(--ease-out);
+      }
+      .btn-outline:hover {
+        border-color: var(--c-ink);
+        color: var(--c-ink);
+        transform: translateY(-2px);
+      }
+      .hero-visual {
+        position: relative;
+      }
+      .hero-card {
+        background: var(--c-white);
+        border-radius: var(--r-xl);
+        border: 1px solid var(--c-border);
+        overflow: hidden;
+        aspect-ratio: 3/4;
+        position: relative;
+      }
+      .hero-card-inner {
+        height: 100%;
+        background: url("images/me2.png") center/cover no-repeat;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-card-inner::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.7),
+          rgba(0, 0, 0, 0.2),
+          transparent
+        );
+        z-index: 0;
+      }
+      .hero-card-orb {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--c-accent);
+        opacity: 0.15;
+        animation: float 6s ease-in-out infinite;
+      }
+      .hero-card-orb-1 {
+        width: 200px;
+        height: 200px;
+        top: -60px;
+        right: -60px;
+      }
+      .hero-card-orb-2 {
+        width: 120px;
+        height: 120px;
+        bottom: 80px;
+        left: -40px;
+        animation-delay: -3s;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+      .hero-card-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--c-accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--c-ink);
+        margin-bottom: 1rem;
+        border: 3px solid rgba(200, 247, 62, 0.3);
+        position: relative;
+        z-index: 1;
+      }
+      .hero-card-name {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--c-white);
+        position: relative;
+        z-index: 1;
+        margin-bottom: 0.25rem;
+      }
+      .hero-card-role {
+        font-size: var(--fs-small);
+        color: rgba(255, 255, 255, 0.6);
+        position: relative;
+        z-index: 1;
+        margin-bottom: 1.5rem;
+      }
+      .hero-card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-card-tag {
+        background: rgba(200, 247, 62, 0.15);
+        border: 1px solid rgba(200, 247, 62, 0.3);
+        color: var(--c-accent);
+        padding: 4px 12px;
+        border-radius: var(--r-pill);
+        font-size: var(--fs-xs);
+        letter-spacing: 0.04em;
+      }
+      .hero-badge {
+        position: absolute;
+        background: var(--c-accent);
+        border-radius: var(--r-lg);
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: var(--fs-xs);
+        font-weight: 600;
+        color: var(--c-ink);
+        box-shadow: 0 8px 24px rgba(200, 247, 62, 0.3);
+        white-space: nowrap;
+      }
+      .hero-badge-1 {
+        bottom: -20px;
+        left: -20px;
+      }
+      .hero-badge-2 {
+        top: 30px;
+        right: 30px;
+        background: var(--c-white);
+        border: 1px solid var(--c-border);
+      }
+      .hero-ticker {
+        position: relative;
+        z-index: 1;
+        border-top: 1px solid var(--c-border);
+        padding: 1.25rem 0;
+        overflow: hidden;
+        display: flex;
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          black 10%,
+          black 90%,
+          transparent
+        );
+      }
+      .hero-ticker-track {
+        display: flex;
+        gap: 3rem;
+        align-items: center;
+        animation: ticker 20s linear infinite;
+        white-space: nowrap;
+      }
+      @keyframes ticker {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .hero-ticker-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: var(--fs-small);
+        color: var(--c-ink-60);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .hero-ticker-dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--c-accent);
+        flex-shrink: 0;
+      }
+
+      /* =====================
+      STATS
+      ===================== */
+      .stats-band {
+        background: var(--c-ink);
+        color: var(--c-white);
+        padding: var(--space-lg) 0;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--r-lg);
+        overflow: hidden;
+      }
+      .stat-item {
+        padding: 2rem 1.5rem;
+        background: var(--c-ink);
+        text-align: center;
+        transition: background var(--dur-fast);
+      }
+      .stat-item:hover {
+        background: #1a1a2e;
+      }
+      .stat-number {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 800;
+        line-height: 1;
+        color: var(--c-accent);
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.04em;
+      }
+      .stat-label {
+        font-size: var(--fs-small);
+        color: rgba(255, 255, 255, 0.5);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      /* =====================
+      ABOUT
+      ===================== */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: var(--space-lg);
+        align-items: center;
+      }
+      .about-label {
+        font-size: var(--fs-xs);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .about-label::before {
+        content: "";
+        width: 24px;
+        height: 1.5px;
+        background: var(--c-accent);
+      }
+      .section-title {
+        font-family: var(--font-display);
+        font-size: var(--fs-h1);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        margin-bottom: 1.5rem;
+      }
+      .section-title em {
+        font-style: normal;
+        color: transparent;
+        -webkit-text-stroke: 2px var(--c-ink);
+      }
+      .about-text {
+        color: var(--c-ink-60);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        font-size: 1.0625rem;
+      }
+      .about-skills-title {
+        font-family: var(--font-display);
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        margin-bottom: 1rem;
+      }
+      .skill-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .skill-pill {
+        padding: 6px 14px;
+        background: var(--c-white);
+        border: 1px solid var(--c-border);
+        border-radius: var(--r-pill);
+        font-size: var(--fs-xs);
+        font-weight: 500;
+        color: var(--c-ink);
+        transition: all var(--dur-fast);
+      }
+      .skill-pill:hover {
+        background: var(--c-accent);
+        border-color: var(--c-accent);
+      }
+      .skill-pill.accent {
+        background: var(--c-accent);
+        border-color: var(--c-accent);
+      }
+      .about-visual {
+        position: relative;
+      }
+
+      /* =====================
+      PROJECTS
+      ===================== */
+      .project-type {
+        font-size: var(--fs-xs);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        margin-bottom: 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .project-type-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--c-accent);
+      }
+
+      /* =====================
+      EXPERIENCE
+      ===================== */
+      .exp-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-md);
+      }
+      .exp-card {
+        background: var(--c-white);
+        border-radius: var(--r-xl);
+        padding: 2rem;
+        border: 1px solid var(--c-border);
+        position: relative;
+        transition: transform var(--dur-mid) var(--ease-out);
+      }
+      .exp-card:hover {
+        transform: translateY(-4px);
+      }
+      .exp-card--accent {
+        background: var(--c-ink);
+        color: var(--c-white);
+        border-color: var(--c-ink);
+      }
+      .exp-period {
+        font-size: var(--fs-xs);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .exp-card--accent .exp-period {
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .exp-period-bar {
+        height: 2px;
+        width: 20px;
+        background: var(--c-accent);
+        border-radius: var(--r-pill);
+      }
+      .exp-role {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.25rem;
+        line-height: 1.3;
+      }
+      .exp-company {
+        font-size: var(--fs-small);
+        color: var(--c-muted);
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+      .exp-card--accent .exp-company {
+        color: var(--c-accent);
+      }
+      .exp-desc {
+        font-size: var(--fs-small);
+        color: var(--c-ink-60);
+        line-height: 1.7;
+      }
+      .exp-card--accent .exp-desc {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .exp-tag {
+        display: inline-flex;
+        margin-top: 1rem;
+        padding: 4px 12px;
+        background: rgba(200, 247, 62, 0.15);
+        border: 1px solid rgba(200, 247, 62, 0.25);
+        border-radius: var(--r-pill);
+        font-size: var(--fs-xs);
+        color: var(--c-accent);
+        font-weight: 600;
+      }
+
+      /* =====================
+      CONTACT
+      ===================== */
+      .contact-section {
+        background: var(--c-ink);
+        color: var(--c-white);
+        padding: var(--space-xl) 0 var(--space-lg);
+        position: relative;
+        overflow: hidden;
+      }
+      .contact-bg {
+        position: absolute;
+        inset: 0;
+        background-image:
+          radial-gradient(
+            ellipse 60% 50% at 80% 20%,
+            rgba(200, 247, 62, 0.08) 0%,
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse 50% 60% at 20% 80%,
+            rgba(200, 247, 62, 0.05) 0%,
+            transparent 60%
+          );
+      }
+      .contact-inner {
+        position: relative;
+        z-index: 1;
+      }
+      .contact-heading {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 7vw, 6rem);
+        font-weight: 800;
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        margin-bottom: 2rem;
+      }
+      .contact-heading span {
+        color: var(--c-accent);
+      }
+      .contact-sub {
+        font-size: 1.125rem;
+        color: rgba(255, 255, 255, 0.5);
+        max-width: 480px;
+        line-height: 1.7;
+        margin-bottom: 3rem;
+      }
+      .contact-email {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-family: var(--font-display);
+        font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+        font-weight: 700;
+        color: var(--c-accent);
+        border-bottom: 2px solid rgba(200, 247, 62, 0.3);
+        padding-bottom: 0.5rem;
+        margin-bottom: 3rem;
+        transition: all var(--dur-fast);
+      }
+      .contact-email:hover {
+        border-color: var(--c-accent);
+      }
+      .contact-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .contact-footer-logo {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 1.25rem;
+        letter-spacing: -0.03em;
+      }
+      .contact-socials {
+        display: flex;
+        gap: 1rem;
+      }
+      .social-link {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--r-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: var(--fs-xs);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        transition: all var(--dur-fast);
+      }
+      .social-link:hover {
+        border-color: var(--c-accent);
+        color: var(--c-accent);
+        background: rgba(200, 247, 62, 0.08);
+      }
+      .contact-copy {
+        font-size: var(--fs-xs);
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 0.05em;
+      }
+
+      /* =====================
+      REVEAL ANIMATION
+      ===================== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity var(--dur-slow) var(--ease-out),
+          transform var(--dur-slow) var(--ease-out);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 100ms;
+      }
+      .reveal-delay-2 {
+        transition-delay: 200ms;
+      }
+      .reveal-delay-3 {
+        transition-delay: 300ms;
+      }
+
+      /* =====================
+      RESPONSIVE
+      ===================== */
+      @media (max-width: 1024px) {
+        .hero .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .hero-visual {
+          display: none;
+        }
+        .hero-left {
+          text-align: center;
+        }
+        .hero-actions {
+          justify-content: center;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .about-visual {
+          order: -1;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .section-title {
+          font-family: var(--font-display);
+          font-size: var(--fs-h1);
+          font-weight: 800;
+          line-height: 1.1;
+          letter-spacing: -0.03em;
+          margin-bottom: 1.5rem;
+        }
+        .section-title em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1.5px var(--c-ink);
+        }
+        .exp-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 820px) {
+        .section-title {
+          font-family: var(--font-display);
+          font-size: var(--fs-h1);
+          font-weight: 800;
+          line-height: 1.1;
+          letter-spacing: 0.01em;
+          margin-bottom: 1.5rem;
+        }
+        .section-title em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1.5px var(--c-ink);
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+        .hero-name {
+          font-family: var(--font-display);
+          font-size: var(--fs-hero);
+          font-weight: 800;
+          line-height: 0.92;
+          letter-spacing: -0.04em;
+          margin-bottom: 1.5rem;
+        }
+        .hero-name em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 2px var(--c-ink);
+        }
+        .section-title {
+          font-family: var(--font-display);
+          font-size: var(--fs-h1);
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          margin-bottom: 1.5rem;
+        }
+        .section-title em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1.5px var(--c-ink);
+        }
+        .contact-footer {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .figma-panel {
+          width: calc(100vw - 4rem);
+        }
+        .lang-btn {
+          padding: 4px 8px;
+        }
+        .nav-cta {
+          display: none;
+        }
+      }
+      @media (max-width: 540px) {
+        .hero-name {
+          font-family: var(--font-display);
+          font-size: var(--fs-hero);
+          font-weight: 800;
+          line-height: 0.92;
+          letter-spacing: -0.04em;
+          margin-bottom: 1.5rem;
+        }
+        .hero-name em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 2px var(--c-ink);
+        }
+        .section-title {
+          font-family: var(--font-display);
+          font-size: var(--fs-h1);
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.02em;
+          margin-bottom: 1.5rem;
+        }
+        .section-title em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1.5px var(--c-ink);
+        }
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 1.25rem;
+        }
+        .hero .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .experience {
+          text-align: center;
+        }
+        .experience .about-label {
+          justify-content: center;
+        }
+        .hero-name {
+          font-family: var(--font-display);
+          font-size: var(--fs-hero);
+          font-weight: 800;
+          line-height: 0.92;
+          letter-spacing: -0.04em;
+          margin-bottom: 1.5rem;
+        }
+        .hero-name em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1px var(--c-ink);
+        }
+        .hero-actions {
+          flex-direction: column;
+          align-items: center;
+        }
+        .stats-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact-heading {
+          font-size: 2.5rem;
+        }
+        .about-grid {
+          display: block;
+        }
+        .about-label {
+          justify-content: center;
+        }
+        .section-title {
+          font-family: var(--font-display);
+          font-size: var(--fs-h1);
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.01em;
+          margin-bottom: 1.5rem;
+          text-align: center;
+        }
+        .section-title em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1px var(--c-ink);
+        }
+        .about-text {
+          text-align: center;
+        }
+        .about-skills-title {
+          text-align: center;
+        }
+        .skill-pills {
+          justify-content: center;
+        }
+        .exp-period {
+          justify-content: center;
+        }
+      }
+      @media (max-width: 380px) {
+        .hero-name {
+          font-family: var(--font-display);
+          font-size: var(--fs-hero);
+          font-weight: 800;
+          line-height: 0.92;
+          letter-spacing: -0.02em;
+          margin-bottom: 1.5rem;
+        }
+        .hero-name em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1px var(--c-ink);
+        }
+        .hero-desc {
+          font-size: var(--fs-small);
+        }
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          gap: var(--space-sm);
+        }
+        .about-grid {
+          display: block;
+        }
+        .about-label {
+          justify-content: center;
+        }
+        .section-title {
+          font-family: var(--font-display);
+          font-size: var(--fs-h1);
+          font-weight: 800;
+          line-height: 1;
+          letter-spacing: -0.01em;
+          margin-bottom: 1.5rem;
+          text-align: center;
+        }
+        .section-title em {
+          font-style: normal;
+          color: transparent;
+          -webkit-text-stroke: 1px var(--c-ink);
+        }
+        .about-text {
+          text-align: center;
+        }
+        .about-skills-title {
+          text-align: center;
+        }
+        .skill-pills {
+          justify-content: center;
+        }
+        .about-visual {
+          margin-top: 2.5rem;
+        }
+        .contact-heading {
+          font-size: 2rem;
+        }
+        .exp-period {
+          justify-content: center;
+        }
+      }
+      .content {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 0 var(--space-md);
+        background: var(--c-surface);
+        padding-block: 6rem;
+      }
+      .project-label {
+        font-size: var(--fs-xs);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--c-muted);
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .project-label::before {
+        content: "";
+        width: 24px;
+        height: 1.5px;
+        background: var(--c-accent);
+      }
+      .content__hero {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 4rem;
+      }
+
+      .content__heading {
+        text-align: center;
+      }
+
+      .features {
+        display: flex;
+        flex-direction: column;
+        gap: 6rem;
+      }
+
+      .features__item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 2rem;
+        height: auto;
+      }
+
+      .features__item--left {
+        flex-direction: row;
+        text-align: right;
+      }
+
+      .features__item--right {
+        flex-direction: row-reverse;
+      }
+
+      .features__image {
+        flex: 1 1 45%;
+        position: relative;
+      }
+
+      .features__card {
+        border-radius: var(--r-lg);
+        overflow: hidden;
+        position: relative;
+        aspect-ratio: 1 / 1;
+      }
+
+      .features__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .features__content {
+        flex: 1 1 50%;
+      }
+
+      .features__title {
+        font-size: var(--fs-h2);
+        font-family: var(--font-display);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-block-end: 1rem;
+      }
+
+      .features__description {
+        line-height: 1.6;
+        color: var(--c-ink-60);
+      }
+
+      /* GSAP animation reveal styles */
+      .gs_reveal {
+        opacity: 0;
+        visibility: hidden;
+        will-change: transform, opacity;
+      }
+    </style>
+  </head>
+
+  <body class="lang-en">
+    <div id="cursor"></div>
+    <div id="cursor-trail"></div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+      <div class="nav-left">
+        <div class="nav-logo">KM <span>Portfolio</span></div>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="#about"
+            ><span class="t-en">About</span><span class="t-id">Tentang</span></a
+          >
+        </li>
+        <li>
+          <a href="#work"
+            ><span class="t-en">Work</span
+            ><span class="t-id">Portofolio</span></a
+          >
+        </li>
+        <li>
+          <a href="#experience"
+            ><span class="t-en">Experience</span
+            ><span class="t-id">Pengalaman</span></a
+          >
+        </li>
+        <li>
+          <a href="#contact"
+            ><span class="t-en">Contact</span
+            ><span class="t-id">Kontak</span></a
+          >
+        </li>
+      </ul>
+      <div class="nav-right">
+        <div class="lang-switcher">
+          <button class="lang-btn active" id="btnEn" onclick="setLang('en')">
+            <img src="https://flagcdn.com/gb.svg" alt="English" /> EN
+          </button>
+          <button class="lang-btn" id="btnId" onclick="setLang('id')">
+            <img src="https://flagcdn.com/id.svg" alt="Indonesia" /> ID
+          </button>
+        </div>
+        <a
+          href="https://wa.me/6288706608471?text=Hello,%20I%20am%20interested%20in%20your%20services"
+          class="nav-cta"
+        >
+          <span class="t-en">Let's Talk →</span
+          ><span class="t-id">Hubungi →</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-bg-grid"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-left">
+            <div class="hero-eyebrow reveal">
+              <div class="hero-eyebrow-dot"></div>
+              <span class="t-en">Available for opportunities</span>
+              <span class="t-id">Terbuka untuk peluang baru</span>
+            </div>
+            <h1 class="hero-name reveal reveal-delay-1">
+              Khasnah<br /><em>Maesaroh</em>
+            </h1>
+            <p class="hero-desc reveal reveal-delay-2">
+              <span class="t-en"
+                >UX/UI Designer & Web Developer crafting responsive,
+                user-centered digital experiences. Based in Central Java.
+                Building the web one pixel at a time.</span
+              >
+              <span class="t-id"
+                >UX/UI Designer & Web Developer yang merancang pengalaman
+                digital responsif dan berpusat pada pengguna. Berbasis di Jawa
+                Tengah. Membangun web satu piksel dalam satu waktu.</span
+              >
+            </p>
+            <div class="hero-actions reveal reveal-delay-3">
+              <a href="#work" class="btn-primary">
+                <span class="t-en">View My Work</span
+                ><span class="t-id">Lihat Karya Saya</span>
+                <span class="arrow">↗</span>
+              </a>
+              <a href="mailto:khasnahm@gmail.com" class="btn-outline">
+                <span class="t-en">Get in Touch</span
+                ><span class="t-id">Hubungi Saya</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-ticker">
+        <div class="hero-ticker-track" id="ticker-track"></div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-band">
+      <div class="container">
+        <div class="stats-grid reveal">
+          <div class="stat-item">
+            <div class="stat-number">2</div>
+            <div class="stat-label">
+              <span class="t-en">Year Experience</span
+              ><span class="t-id">Tahun Pengalaman</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">8+</div>
+            <div class="stat-label">
+              <span class="t-en">Case Studies</span
+              ><span class="t-id">Studi Kasus</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">5+</div>
+            <div class="stat-label">
+              <span class="t-en">Real Client Projects</span
+              ><span class="t-id">Proyek Klien Nyata</span>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">2</div>
+            <div class="stat-label">
+              <span class="t-en">Certifications</span
+              ><span class="t-id">Sertifikasi</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container about">
+        <div class="about-grid">
+          <div>
+            <div class="about-label reveal">
+              <span class="t-en">About Me</span
+              ><span class="t-id">Tentang Saya</span>
+            </div>
+            <h2 class="section-title reveal reveal-delay-1">
+              <span class="t-en"
+                >Design that<br /><em>thinks,</em><br />code that feels.</span
+              >
+              <span class="t-id"
+                >Desain yang<br /><em>dipikirkan,</em><br />pengalaman yang
+                dirasakan.</span
+              >
+            </h2>
+            <p class="about-text reveal reveal-delay-2">
+              <span class="t-en"
+                >I'm a Web Developer & UX/UI Designer with 2+ years of
+                experience building responsive, user-centric digital products. I
+                bridge the gap between design thinking and engineering, working
+                from wireframes to fully deployed systems.</span
+              >
+              <span class="t-id"
+                >Saya adalah Web Developer & UX/UI Designer dengan pengalaman 2
+                tahun membangun produk digital yang responsif dan berpusat pada
+                pengguna. Saya menjembatani antara design thinking dan rekayasa
+                perangkat lunak, dari wireframe hingga sistem yang siap
+                pakai.</span
+              >
+            </p>
+            <p class="about-text reveal reveal-delay-2">
+              <span class="t-en"
+                >Currently working as a freelancer, I have completed various
+                projects using Figma, Laravel, MySQL, JavaScript, and
+                React.js.</span
+              >
+              <span class="t-id"
+                >Saat ini bekerja sebagai freelancer, saya telah menyelesaikan
+                berbagai proyek menggunakan Figma, Laravel, MySQL, JavaScript,
+                dan React.js.</span
+              >
+            </p>
+            <div class="reveal reveal-delay-3">
+              <div class="about-skills-title">
+                <span class="t-en">Technical Stack</span
+                ><span class="t-id">Teknologi yang Digunakan</span>
+              </div>
+              <div class="skill-pills">
+                <span class="skill-pill accent">Figma</span>
+                <span class="skill-pill accent">Prototyping</span>
+                <span class="skill-pill accent">UX Research</span
+                ><span class="skill-pill accent">Wireframing</span
+                ><span class="skill-pill accent">Usability Testing</span>
+                <span class="skill-pill accent">Laravel</span>
+                <span class="skill-pill accent">HTML5 / CSS3</span
+                ><span class="skill-pill">JavaScript</span
+                ><span class="skill-pill">MySQL</span>
+                <span class="skill-pill">React.js</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-visual reveal reveal-delay-2">
+            <div class="hero-card">
+              <div class="hero-card-inner">
+                <div class="hero-card-orb hero-card-orb-1"></div>
+                <div class="hero-card-orb hero-card-orb-2"></div>
+                <!-- <div class="hero-card-avatar">KM</div> -->
+                <div class="hero-card-name">Khasnah Maesaroh</div>
+                <div class="hero-card-role">UX/UI Designer · Web Developer</div>
+                <div class="hero-card-tags">
+                  <span class="hero-card-tag">Figma</span>
+                  <span class="hero-card-tag">UX Research</span>
+                  <span class="hero-card-tag">Prototyping</span>
+                  <span class="hero-card-tag">Laravel</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="hero-badge hero-badge-1">✦ GPA 4.00</div> -->
+            <div class="hero-badge hero-badge-2">📍 Jawa Tengah, ID</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <!-- <div class="marquee-section"><div class="marquee-track" id="marquee-track"></div></div> -->
+
+    <!-- PROJECTS -->
+    <div class="content" id="work">
+      <div class="content__hero">
+        <h2 class="section-title content__heading gs_reveal">
+          <div class="project-label reveal">
+            <span class="t-en">Selected Work</span
+            ><span class="t-id">Karya Pilihan</span>
+          </div>
+          <span class="t-en">Projects I've<br /><em>shipped</em></span>
+          <span class="t-id">Proyek yang telah<br /><em>diluncurkan</em></span>
+        </h2>
+      </div>
+
+      <div class="features">
+        <div
+          class="features__item features__item--left gs_reveal gs_reveal_fromLeft"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/midhub.jpg" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">UI/UX DESIGN</span
+              ><span class="t-id">DESAIN UI/UX</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en"
+                >Heavy Equipment <br />
+                Marketplace Platform</span
+              >
+              <span class="t-id"
+                >Platform Marketplace <br />
+                Alat Berat</span
+              >
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Designed an end-to-end digital platform for PT Uniteda Arkato.
+                <br />
+                Enabling industrial buyers and sellers to list, search, <br />
+                and transact heavy equipment through <br />
+                intuitive flows and a scalable design system.</span
+              >
+              <span class="t-id"
+                >Mendesain platform digital end-to-end untuk PT Uniteda Arkato
+                <br />
+                memungkinkan pembeli dan penjual industri untuk <br />
+                mendaftarkan, mencari, dan melakukan transaksi peralatan berat
+                <br />
+                melalui alur yang intuitif dan sistem desain yang dapat
+                diskalakan.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/pos.png" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">FULL-STACK DEVELOPMENT</span
+              ><span class="t-id">PENGEMBANGAN FULL-STACK</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">Custom Point of Sales</span>
+              <span class="t-id">Point of Sales Kustom</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                PoS for transaction management, <br />
+                inventory tracking, and automated sales reports <br />
+                using Laravel, MySQL, Bootstrap, and jQuery.</span
+              >
+              <span class="t-id"
+                >PoS untuk manajemen transaksi, <br />
+                pelacakan inventaris, dan laporan penjualan otomatis <br />
+                menggunakan Laravel, MySQL, ootstrap, dan jQuery.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="features__item features__item--left gs_reveal gs_reveal_fromLeft"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/ptsp.png" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">UI/UX DESIGN</span
+              ><span class="t-id">DESAIN UI/UX</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">Website Redesign</span>
+              <span class="t-id">Mendesain Ulang Website</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Reimagined the public-facing portal for an institution, <br />
+                simplifying service information architecture and
+                <br />
+                crafting a modern, accessible interface for government
+                users.</span
+              >
+              <span class="t-id"
+                >Mendesain ulang portal layanan publik suatu Institusi, <br />
+                menyederhanakan arsitektur informasi layanan dan membuat <br />
+                antarmuka yang modern dan dapat diakses untuk masyarakat.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/man.png" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">UI/UX DESIGN</span
+              ><span class="t-id">DESAIN UI/UX</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en"
+                >Library Website <br />
+                UI Design
+              </span>
+              <span class="t-id"
+                >Desain Antarmuka <br />
+                Website Perpustakaan</span
+              >
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Crafted a high-fidelity library management UI for a school,
+                <br />
+                streamlining book search, borrowing, and reservation with a
+                <br />
+                consistent visual style guide and intuitive navigation.</span
+              >
+              <span class="t-id"
+                >Membuat antarmuka pengguna manajemen perpustakaan <br />
+                berkualitas tinggi untuk sebuah sekolah. Mempermudah pencarian,
+                <br />
+                peminjaman, dan reservasi buku dengan panduan <br />
+                gaya visual yang konsisten dan navigasi yang intuitif.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="features__item features__item--left gs_reveal gs_reveal_fromLeft"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/siola.png" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">BACK-END DEVELOPMENT</span
+              ><span class="t-id">PENGEMBANGAN BACK-END</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">SIOLA Admin System</span>
+              <span class="t-id">Aplikasi SIOLA</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Digitized internal admin processes at Dinas Kesehatan Kota
+                Tegal,
+                <br />
+                fuel requests, vehicle reservations, monthly reports.</span
+              >
+              <span class="t-id"
+                >Digitalisasi proses administrasi internal Dinas Kesehatan Kota
+                Tegal,
+                <br />
+                permintaan bahan bakar, reservasi kendaraan dinas, laporan
+                bulanan.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <!-- <div
+          class="features__item features__item--right gs_reveal gs_reveal_fromRight"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img
+                class="features__img"
+                src="https://assets.codepen.io/16327/portrait-image-1.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">BACK-END DEVELOPMENT</span
+              ><span class="t-id">PENGEMBANGAN BACK-END</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">INTERNSHIP APP SYSTEM </span>
+              <span class="t-id">SISTEM APLIKASI MAGANG</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Designed a system to facilitate the process of applying for
+                <br />
+                field work practices (praktik kerja lapangan), enabling the
+                <br />
+                entire application process to be conducted online.</span
+              >
+              <span class="t-id"
+                >Merancang sebuah sistem untuk memfasilitasi proses pengajuan
+                <br />
+                praktik kerja lapangan, memungkinkan seluruh proses pengajuan
+                <br />
+                dilakukan secara online.</span
+              >
+            </p>
+          </div>
+        </div> -->
+
+        <div
+          class="features__item features__item--right gs_reveal gs_reveal_fromLeft"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/fintrax.jpg" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">UI/UX DESIGN</span
+              ><span class="t-id">DESAIN UI/UX</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">Fintrax App</span>
+              <span class="t-id">Aplikasi Fintrax</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Designed wireframes and interactive prototypes for a budgeting
+                <br />
+                and financial planning app, centering user-friendly financial
+                <br />
+                insights, personalized recommendations, and clear data <br />
+                visualization.</span
+              >
+              <span class="t-id"
+                >Merancang wireframe dan prototipe interaktif untuk aplikasi
+                <br />
+                penganggaran dan perencanaan keuangan, berfokus pada wawasan
+                <br />
+                keuangan yang ramah pengguna, rekomendasi yang dipersonalisasi,
+                <br />
+                dan visualisasi data yang jelas.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="features__item features__item--left gs_reveal gs_reveal_fromRight"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/literasik.jpg" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">UI/UX DESIGN</span
+              ><span class="t-id">DESAIN UI/UX</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">Digital Literacy Platform </span>
+              <span class="t-id">Platform Literasi Digital</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Architected information structure and gamification mechanics for
+                <br />
+                a digital literacy app — boosting user engagement through <br />
+                interactive content, achievement loops, and a cohesive visual
+                language.</span
+              >
+              <span class="t-id"
+                >Merancang struktur informasi dan mekanika gamifikasi <br />
+                untuk aplikasi literasi digital, meningkatkan keterlibatan
+                pengguna <br />
+                melalui konten interaktif, siklus pencapaian, <br />
+                dan bahasa visual yang kohesif.</span
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="features__item features__item--right gs_reveal gs_reveal_fromLeft"
+        >
+          <div class="features__image">
+            <div class="features__card">
+              <img class="features__img" src="images/lokalezat.png" alt="" />
+            </div>
+          </div>
+          <div class="features__content">
+            <div class="project-type">
+              <div class="project-type-dot gs-reveal"></div>
+              <span class="t-en">UI/UX DESIGN</span
+              ><span class="t-id">DESAIN UI/UX</span>
+            </div>
+            <h2 class="features__title gs_reveal">
+              <span class="t-en">Localezat - Culinary Finder</span>
+              <span class="t-id">Lokalezat - Pencari Kuliner</span>
+            </h2>
+            <p class="features__description gs_reveal">
+              <span class="t-en">
+                Conducting UX research and designing UI with interviews and
+                <br />
+                surveys to identify pain points for a <br />
+                local culinary discovery platform prototype.</span
+              >
+              <span class="t-id"
+                >Melakukan riset UX dan mendesain UI dengan <br />
+                wawancara dan survei untuk mengidentifikasi pain points pada
+                <br />
+                prototipe platform penemuan kuliner lokal.</span
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="container experience">
+        <div class="about-label reveal">
+          <span class="t-en">Experience</span
+          ><span class="t-id">Pengalaman</span>
+        </div>
+        <h2 class="section-title reveal reveal-delay-1">
+          <span class="t-en">Where I've<br /><em>worked</em></span>
+          <span class="t-id">Tempat saya<br /><em>berkarya</em></span>
+        </h2>
+        <div style="height: var(--space-md)"></div>
+        <div class="exp-grid">
+          <div class="exp-card exp-card--accent reveal">
+            <div class="exp-period">
+              <div class="exp-period-bar"></div>
+              <span class="t-en">July 2025 — Present</span
+              ><span class="t-id">Juli 2025 — Sekarang</span>
+            </div>
+            <div class="exp-role">
+              <span class="t-en"
+                >Freelance Web Developer<br />& UX/UI Designer</span
+              ><span class="t-id"
+                >Freelance Web Developer<br />& UX/UI Designer</span
+              >
+            </div>
+            <div class="exp-company">
+              <span class="t-en">Self-Employed · Remote</span
+              ><span class="t-id">Pekerja Lepas · Remote</span>
+            </div>
+            <div class="exp-desc">
+              <span class="t-en"
+                >Building responsive websites and design systems for clients
+                across multiple industries. Handling full product lifecycle from
+                wireframes to deployment.</span
+              >
+              <span class="t-id"
+                >Membangun website responsif dan design system untuk klien dari
+                berbagai industri. Menangani siklus produk penuh dari wireframe
+                hingga deployment.</span
+              >
+            </div>
+            <span class="exp-tag"
+              ><span class="t-en">Currently Active</span
+              ><span class="t-id">Aktif Sekarang</span></span
+            >
+          </div>
+
+          <div class="exp-card reveal reveal-delay-1">
+            <div class="exp-period">
+              <div class="exp-period-bar"></div>
+              <span class="t-en">Sept 2024 — Dec 2024</span
+              ><span class="t-id">Sept 2024 — Des 2024</span>
+            </div>
+            <div class="exp-role">
+              <span class="t-en">Programmer Intern</span
+              ><span class="t-id">Magang Programmer</span>
+            </div>
+            <div class="exp-company">Dinas Kesehatan Kota Tegal</div>
+            <div class="exp-desc">
+              <span class="t-en"
+                >Developed two web-based systems using PHP and MySQL —
+                digitizing administrative processes and internship registration
+                workflows that were previously manual.</span
+              >
+              <span class="t-id"
+                >Mengembangkan dua sistem berbasis web menggunakan PHP dan MySQL
+                — mendigitalisasi proses administrasi dan alur pendaftaran
+                magang yang sebelumnya manual.</span
+              >
+            </div>
+          </div>
+
+          <div class="exp-card reveal">
+            <div class="exp-period">
+              <div class="exp-period-bar"></div>
+              <span class="t-en">Oct 2023 — Jan 2024</span
+              ><span class="t-id">Okt 2023 — Jan 2024</span>
+            </div>
+            <div class="exp-role">
+              <span class="t-en"
+                >MSIB Participant<br />Web Dev & UI/UX Design</span
+              ><span class="t-id"
+                >Peserta MSIB<br />Web Dev & UI/UX Design</span
+              >
+            </div>
+            <div class="exp-company">Celerates · Acceleration Program</div>
+            <div class="exp-desc">
+              <span class="t-en"
+                >6-month intensive: Full-Stack Development (JavaScript,
+                React.js, Express.js, Node.js) and Design Thinking. Co-built
+                Fintrax and designed Literasik prototype in Figma.</span
+              >
+              <span class="t-id"
+                >Program intensif 6 bulan: Full-Stack Development (JavaScript,
+                React.js, Express.js, Node.js) dan Design Thinking. Bersama tim
+                mengembangkan Fintrax dan merancang prototipe Literasik di
+                Figma.</span
+              >
+            </div>
+          </div>
+
+          <div class="exp-card reveal reveal-delay-1">
+            <div class="exp-period">
+              <div class="exp-period-bar"></div>
+              <span class="t-en">Sept 2022 — Aug 2025</span
+              ><span class="t-id">Sept 2022 — Agu 2025</span>
+            </div>
+            <div class="exp-role">
+              <span class="t-en">D3 Information Systems</span
+              ><span class="t-id">D3 Sistem Informasi</span>
+            </div>
+            <div class="exp-company">Universitas Bina Sarana Informatika</div>
+            <div class="exp-desc">
+              <span class="t-en">
+                Information Systems graduate with a focus on designing web-based
+                solutions. Final thesis examined how digital systems can
+                streamline and improve administrative workflows.
+              </span>
+              <span class="t-id">
+                Lulusan Sistem Informasi dengan fokus pada perancangan solusi
+                berbasis web. Skripsi mengkaji bagaimana sistem digital dapat
+                menyederhanakan dan meningkatkan efisiensi alur kerja
+                administrasi.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+      <div class="contact-bg"></div>
+      <div class="container contact-inner">
+        <div class="about-label reveal" style="color: rgba(255, 255, 255, 0.4)">
+          <span class="t-en">Let's Work Together</span
+          ><span class="t-id">Mari Berkolaborasi</span>
+        </div>
+        <h2 class="contact-heading reveal reveal-delay-1">
+          <span class="t-en">Got a project<br />in <span>mind?</span></span>
+          <span class="t-id"
+            >Punya proyek<br />yang <span>ingin dibangun?</span></span
+          >
+        </h2>
+        <p class="contact-sub reveal reveal-delay-2">
+          <span class="t-en"
+            >I'm open to freelance projects, full-time roles, and
+            collaborations. Whether it's a full product or a quick design audit,
+            let's make something great.</span
+          >
+          <span class="t-id"
+            >Saya terbuka untuk proyek freelance, posisi full-time, dan
+            kolaborasi. Baik itu produk penuh maupun audit desain singkat, mari
+            ciptakan sesuatu yang luar biasa.</span
+          >
+        </p>
+        <a
+          href="mailto:khasnahm@gmail.com"
+          class="contact-email reveal reveal-delay-3"
+          >khasnahm@gmail.com ↗</a
+        >
+        <div class="contact-footer reveal">
+          <div class="contact-footer-logo">
+            Khasnah<span style="color: var(--c-accent)">.</span>
+          </div>
+          <div class="contact-socials">
+            <a href="tel:+6288706608471" class="social-link">📞</a>
+            <a href="https://github.com" class="social-link" target="_blank"
+              >GH</a
+            >
+            <a href="https://linkedin.com" class="social-link" target="_blank"
+              >LI</a
+            >
+            <a href="https://figma.com" class="social-link" target="_blank"
+              >FG</a
+            >
+          </div>
+          <div class="contact-copy">
+            <span class="t-en"
+              >© 2025 Khasnah Maesaroh. All rights reserved.</span
+            >
+            <span class="t-id"
+              >© 2025 Khasnah Maesaroh. Hak cipta dilindungi.</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script>
+      /* === LANGUAGE SYSTEM === */
+      function setLang(lang) {
+        document.body.classList.remove("lang-en", "lang-id");
+        document.body.classList.add("lang-" + lang);
+        document.documentElement.lang = lang;
+        document
+          .getElementById("btnEn")
+          .classList.toggle("active", lang === "en");
+        document
+          .getElementById("btnId")
+          .classList.toggle("active", lang === "id");
+        try {
+          localStorage.setItem("km-lang", lang);
+        } catch (e) {}
+        // Subtle fade
+        document.body.style.opacity = "0.82";
+        setTimeout(() => {
+          document.body.style.opacity = "1";
+        }, 30);
+      }
+      // Restore saved language
+      (function () {
+        let lang = "en";
+        try {
+          lang = localStorage.getItem("km-lang") || "en";
+        } catch (e) {}
+        if (lang === "id") setLang("id");
+      })();
+
+      /* === CURSOR === */
+      const cursor = document.getElementById("cursor");
+      const trail = document.getElementById("cursor-trail");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+        setTimeout(() => {
+          trail.style.left = e.clientX + "px";
+          trail.style.top = e.clientY + "px";
+        }, 80);
+      });
+      document
+        .querySelectorAll("a,button,.project-card,.exp-card,.stat-item")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () =>
+            cursor.classList.add("expand"),
+          );
+          el.addEventListener("mouseleave", () =>
+            cursor.classList.remove("expand"),
+          );
+        });
+
+      /* === NAV SCROLL === */
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () =>
+        navbar.classList.toggle("scrolled", scrollY > 60),
+      );
+
+      /* === TICKER === */
+      const tickerItems = [
+        "Laravel",
+        "Figma",
+        "UX Research",
+        "MySQL",
+        "HTML5 / CSS3",
+        "Design Systems",
+        "Prototyping",
+        "Usability Testing",
+        "Wireframing",
+        "PHP",
+        "Agile / Scrum",
+      ];
+      const ttrack = document.getElementById("ticker-track");
+      ttrack.innerHTML = [...tickerItems, ...tickerItems]
+        .map(
+          (t) =>
+            `<div class="hero-ticker-item"><div class="hero-ticker-dot"></div>${t}</div>`,
+        )
+        .join("");
+
+      /* === MARQUEE === */
+      // const marqueeItems = ['Laravel','Figma','UX Research','MySQL','HTML5 / CSS3','Design Systems','Prototyping','Usability Testing','Wireframing','PHP','Agile / Scrum'];
+      // const mtrack = document.getElementById('marquee-track');
+      // mtrack.innerHTML = [...marqueeItems,...marqueeItems,...marqueeItems].map(i =>
+      //   `<div class="marquee-item"><svg viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="3" fill="currentColor"/></svg>${i}</div>`
+      // ).join('');
+
+      function animateFrom(elem, direction) {
+        direction = direction || 1;
+        var x = 0,
+          y = direction * 100;
+        if (elem.classList.contains("gs_reveal_fromLeft")) {
+          x = -100;
+          y = 0;
+        } else if (elem.classList.contains("gs_reveal_fromRight")) {
+          x = 100;
+          y = 0;
+        }
+        elem.style.transform = "translate(" + x + "px, " + y + "px)";
+        elem.style.opacity = "0";
+        gsap.fromTo(
+          elem,
+          { x: x, y: y, autoAlpha: 0 },
+          {
+            duration: 1.25,
+            x: 0,
+            y: 0,
+            autoAlpha: 1,
+            ease: "expo",
+            overwrite: "auto",
+          },
+        );
+      }
+
+      function hide(elem) {
+        gsap.set(elem, { autoAlpha: 0 });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.utils.toArray(".gs_reveal").forEach(function (elem) {
+          hide(elem); // assure that the element is hidden when scrolled into view
+
+          ScrollTrigger.create({
+            trigger: elem,
+            // markers: true,
+            onEnter: function () {
+              animateFrom(elem);
+            },
+            onEnterBack: function () {
+              animateFrom(elem, -1);
+            },
+            onLeave: function () {
+              hide(elem);
+            }, // assure that the element is hidden when scrolled into view
+          });
+        });
+      });
+
+      /* === SCROLL REVEAL === */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      /* === FIGMA PANEL === */
+      const fab = document.getElementById("figmaFab");
+      const panel = document.getElementById("figmaPanel");
+      fab.addEventListener("click", () => panel.classList.toggle("open"));
+      document.addEventListener("click", (e) => {
+        if (!fab.contains(e.target) && !panel.contains(e.target))
+          panel.classList.remove("open");
+      });
+    </script>
+  </body>
+</html>
