@@ -1823,6 +1823,22 @@
           height: 12px;
         }
       }
+      .main-tool-bar {
+        color: #0e100f;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        position: fixed;
+        width: 100%;
+        left: 0;
+        top: 0;
+        transition: ease 0.4s;
+        &--scrolled {
+          height: 40px;
+        }
+      }
     </style>
   </head>
 
@@ -1831,7 +1847,7 @@
     <div id="cursor-trail"></div>
 
     <!-- NAV -->
-    <nav id="navbar">
+    <nav class="main-tool-bar" id="navbar">
       <div class="nav-left">
         <div class="nav-logo">KM <span>Portfolio</span></div>
       </div>
@@ -2637,6 +2653,22 @@
       window.addEventListener("scroll", () =>
         navbar.classList.toggle("scrolled", scrollY > 60),
       );
+      const showAnim = gsap
+        .from(".main-tool-bar", {
+          yPercent: -100,
+          paused: true,
+          duration: 0.2,
+        })
+        .progress(1);
+
+      ScrollTrigger.create({
+        start: "top top",
+        end: "max",
+        // markers: true,
+        onUpdate: (self) => {
+          self.direction === -1 ? showAnim.play() : showAnim.reverse();
+        },
+      });
 
       /* === TICKER === */
       const tickerItems = [
@@ -2675,7 +2707,7 @@
           });
 
           // On mobile, skip the pinning entirely
-          if (window.innerWidth <= 900) return;
+          if (window.innerWidth <= 1024) return;
 
           var panels = gsap.utils.toArray(".slide-panel");
           var pinnedPanels = panels.slice(0, panels.length - 1);
