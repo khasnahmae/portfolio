@@ -163,37 +163,58 @@
         margin-right: 6px;
       }
 
-      /* CURSOR */
+      /* === FIGMA STYLE CURSOR === */
       #cursor {
         position: fixed;
-        width: 12px;
-        height: 12px;
-        background: var(--c-accent);
-        border-radius: 50%;
+        left: 0;
+        top: 0;
         pointer-events: none;
         z-index: 9999;
         transform: translate(-50%, -50%);
-        transition:
-          width var(--dur-mid) var(--ease-out),
-          height var(--dur-mid) var(--ease-out);
-        mix-blend-mode: multiply;
       }
-      #cursor.expand {
-        width: 48px;
-        height: 48px;
+
+      /* pointer (segitiga ala figma) */
+      #cursor::before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-left: 10px solid var(--c-accent-dim);
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        transform: rotate(-20deg);
       }
+
+      /* label "You" */
+      .cursor-label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--c-accent-dim);
+        color: var(--c-white);
+        font-size: var(--fs-small);
+        padding: 4px 8px;
+        border-radius: 6px;
+        white-space: nowrap;
+        transform: scale(0.9);
+        transform-origin: left top;
+        transition: transform 0.2s ease;
+      }
+
+      /* hover state */
+      #cursor.expand .cursor-label {
+        transform: scale(1.1);
+      }
+
+      /* trail tetep */
       #cursor-trail {
         position: fixed;
-        width: 32px;
-        height: 32px;
-        border: 1.5px solid var(--c-ink-30);
-        border-radius: 50%;
+        width: 28px;
+        height: 28px;
         pointer-events: none;
         z-index: 9998;
         transform: translate(-50%, -50%);
-        transition:
-          left 120ms linear,
-          top 120ms linear;
+        transition: all 0.15s linear;
       }
 
       /* LAYOUT */
@@ -1843,7 +1864,9 @@
   </head>
 
   <body class="lang-en">
-    <div id="cursor"></div>
+    <div id="cursor">
+      <span class="cursor-label">You</span>
+    </div>
     <div id="cursor-trail"></div>
 
     <!-- NAV -->
@@ -1877,14 +1900,14 @@
         </li>
       </ul>
       <div class="nav-right">
-        <div class="lang-switcher">
+        <!-- <div class="lang-switcher">
           <button class="lang-btn active" id="btnEn" onclick="setLang('en')">
             <img src="https://flagcdn.com/gb.svg" alt="English" /> EN
           </button>
           <button class="lang-btn" id="btnId" onclick="setLang('id')">
             <img src="https://flagcdn.com/id.svg" alt="Indonesia" /> ID
           </button>
-        </div>
+        </div> -->
         <a
           href="https://wa.me/6288706608471?text=Hello,%20I%20am%20interested%20in%20your%20services"
           class="nav-cta"
@@ -1937,14 +1960,14 @@
           gap: 1rem;
         "
       >
-        <div class="lang-switcher" style="display: flex">
+        <!-- <div class="lang-switcher" style="display: flex">
           <button class="lang-btn" id="mDrawerBtnEn" onclick="setLang('en')">
             <img src="https://flagcdn.com/gb.svg" alt="English" /> EN
           </button>
           <button class="lang-btn" id="mDrawerBtnId" onclick="setLang('id')">
             <img src="https://flagcdn.com/id.svg" alt="Indonesia" /> ID
           </button>
-        </div>
+        </div> -->
         <a
           href="https://wa.me/6288706608471?text=Hello,%20I%20am%20interested%20in%20your%20services"
           class="nav-cta"
@@ -1974,13 +1997,13 @@
             <p class="hero-desc reveal reveal-delay-2">
               <span class="t-en"
                 >UX/UI Designer & Web Developer crafting responsive,
-                user-centered digital experiences. Based in Central Java.
-                Building the web one pixel at a time.</span
+                user-centered digital experiences. Building the web one pixel at
+                a time.</span
               >
               <span class="t-id"
                 >UX/UI Designer & Web Developer yang merancang pengalaman
-                digital responsif dan berpusat pada pengguna. Berbasis di Jawa
-                Tengah. Membangun web satu piksel dalam satu waktu.</span
+                digital responsif dan berpusat pada pengguna. Membangun web satu
+                piksel dalam satu waktu.</span
               >
             </p>
             <div class="hero-actions reveal reveal-delay-3">
@@ -2626,17 +2649,36 @@
         if (lang === "id") setLang("id");
       })();
 
-      /* === CURSOR === */
       const cursor = document.getElementById("cursor");
       const trail = document.getElementById("cursor-trail");
+
+      let mouseX = 0,
+        mouseY = 0;
+      let posX = 0,
+        posY = 0;
+
+      // track mouse
       document.addEventListener("mousemove", (e) => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-        setTimeout(() => {
-          trail.style.left = e.clientX + "px";
-          trail.style.top = e.clientY + "px";
-        }, 80);
+        mouseX = e.clientX;
+        mouseY = e.clientY;
       });
+
+      // smooth follow (biar nggak kaku)
+      function animateCursor() {
+        posX += (mouseX - posX) * 0.2;
+        posY += (mouseY - posY) * 0.2;
+
+        cursor.style.left = posX + "px";
+        cursor.style.top = posY + "px";
+
+        trail.style.left = mouseX + "px";
+        trail.style.top = mouseY + "px";
+
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // hover interaction
       document
         .querySelectorAll("a,button,.exp-card,.stat-item")
         .forEach((el) => {
