@@ -742,7 +742,8 @@
         line-height: 1.08;
         letter-spacing: 0.01em;
         position: relative;
-        display: inline-block;
+        display: block;
+        width: 100%;
       }
 
       /* Tanda Petik Pembuka */
@@ -769,6 +770,7 @@
       }
       .about-text-wrapper {
         display: block;
+        width: 100%;
       }
       #about-sticky-container {
         padding-top: var(--space-lg);
@@ -809,7 +811,8 @@
       .typing-container {
         position: relative;
         height: 380px; /* overridden per breakpoint */
-        overflow: hidden;
+        overflow: visible;
+        width: 100%;
       }
       .typing-slides {
         position: absolute;
@@ -822,11 +825,13 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
         opacity: 0;
         display: block;
-        word-break: break-word;
+        word-break: normal;
         overflow-wrap: break-word;
+        overflow: visible;
+        white-space: normal;
+        hyphens: none;
       }
       #about-trigger {
         min-height: 600vh;
@@ -1427,20 +1432,54 @@
         .about-grid {
           grid-template-columns: 1fr;
           gap: var(--space-lg);
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .about-grid .wrapper {
+          width: 100%;
+          text-align: center;
+        }
+        .about-label {
+          justify-content: center;
         }
         .about-text {
-          font-size: clamp(2.2rem, 6.2vw, 3.2rem);
-          line-height: 1.1;
-          text-align: left;
+          font-size: clamp(1.6rem, 4vw, 2.4rem);
+          line-height: 1.25;
+          text-align: center;
+          width: 100%;
+          display: block;
         }
-        .about-visual {
-          display: none;
+        .about-text-wrapper {
+          width: 100%;
+          display: block;
+        }
+        #about-sticky-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          padding-top: 0;
+          padding-bottom: 0;
         }
         #about-trigger {
           min-height: 400vh;
         }
         .typing-container {
-          height: 320px;
+          position: relative;
+          height: auto;
+          min-height: 200px;
+          width: 100%;
+          overflow: visible;
+        }
+        .typing-slides {
+          position: relative;
+          width: 100%;
+        }
+        .typing-slide {
+          position: relative;
+          width: 100%;
+          opacity: 0;
         }
         .hero-card {
           height: 500px;
@@ -1510,15 +1549,52 @@
           font-size: clamp(1.5rem, 5vw, 2.25rem);
         }
         .about-text {
-          font-size: clamp(1.5rem, 5.5vw, 2.75rem);
-          line-height: 1.15;
-          text-align: left;
+          font-size: clamp(1.4rem, 4vw, 2.2rem);
+          line-height: 1.3;
+          text-align: center;
+          width: 100%;
+          display: block;
+        }
+        .about-label {
+          justify-content: center;
+        }
+        .about-grid .wrapper {
+          width: 100%;
+          text-align: center;
+        }
+        .about-text-wrapper {
+          width: 100%;
+          display: block;
+        }
+        #about-sticky-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        .hero-visual {
+          display: none;
         }
         #about-trigger {
           min-height: 300vh;
         }
         .typing-container {
-          height: 280px;
+          position: relative;
+          height: auto;
+          min-height: 180px;
+          width: 100%;
+          overflow: visible;
+        }
+        .typing-slides {
+          position: relative;
+          width: 100%;
+        }
+        .typing-slide {
+          position: relative;
+          width: 100%;
+          opacity: 0;
         }
         .exp-card {
           padding: 1.5rem;
@@ -1634,23 +1710,58 @@
         .stat-item {
           padding: 1.25rem 0.75rem;
         }
-        .about-label {
-          font-size: 0.6rem;
-        }
         .section-title {
           font-size: clamp(1.375rem, 7vw, 2rem);
           margin-bottom: 1rem;
         }
         .about-text {
-          font-size: clamp(2rem, 6vw, 3rem);
-          line-height: 1.2;
-          text-align: left;
+          font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+          line-height: 1.4;
+          text-align: center;
+          width: 100%;
+          display: block;
+        }
+        .about-label {
+          justify-content: center;
+          font-size: 0.6rem;
+        }
+        .about-grid .wrapper {
+          width: 100%;
+          text-align: center;
+        }
+        .about-text-wrapper {
+          width: 100%;
+          display: block;
+        }
+        #about-sticky-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        .hero-visual {
+          display: none;
         }
         #about-trigger {
           min-height: 250vh;
         }
         .typing-container {
-          height: 240px;
+          position: relative;
+          height: auto;
+          min-height: 150px;
+          width: 100%;
+          overflow: visible;
+        }
+        .typing-slides {
+          position: relative;
+          width: 100%;
+        }
+        .typing-slide {
+          position: relative;
+          width: 100%;
+          opacity: 0;
         }
         .exp-grid {
           gap: var(--space-md);
@@ -1772,15 +1883,52 @@
           font-size: clamp(1.25rem, 8vw, 1.75rem);
         }
         .about-text {
-          font-size: clamp(1.8rem, 3.8vw, 2.8rem);
-          line-height: 1.2;
-          text-align: left;
+          font-size: clamp(1.125rem, 4vw, 1.5rem);
+          line-height: 1.5;
+          text-align: center;
+          width: 100%;
+          display: block;
+        }
+        .about-label {
+          justify-content: center;
+        }
+        .about-grid .wrapper {
+          width: 100%;
+          text-align: center;
+        }
+        .about-text-wrapper {
+          width: 100%;
+          display: block;
+        }
+        #about-sticky-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+          padding-top: 0;
+          padding-bottom: 0;
+        }
+        .hero-visual {
+          display: none;
         }
         #about-trigger {
           min-height: 220vh;
         }
         .typing-container {
-          height: 200px;
+          position: relative;
+          height: auto;
+          min-height: 120px;
+          width: 100%;
+          overflow: visible;
+        }
+        .typing-slides {
+          position: relative;
+          width: 100%;
+        }
+        .typing-slide {
+          position: relative;
+          width: 100%;
+          opacity: 0;
         }
         .exp-card {
           padding: 1rem;
@@ -1844,51 +1992,6 @@
         #cursor,
         #cursor-trail {
           display: none;
-        }
-      }
-
-      /* =============================================
-         ABOUT SECTION — Responsive overrides
-      ============================================= */
-
-      @media (max-width: 900px) {
-        #about-sticky-container {
-          padding-top: var(--space-lg);
-          padding-bottom: var(--space-lg);
-        }
-      }
-
-      /* 768px */
-      @media (max-width: 768px) {
-        #about-sticky-container {
-          padding-top: var(--space-md);
-          padding-bottom: var(--space-md);
-        }
-        .about-label {
-          margin-bottom: 1.25rem;
-        }
-      }
-
-      /* 540px */
-      @media (max-width: 540px) {
-        #about-sticky-container {
-          padding-top: 1.5rem;
-          padding-bottom: 1.5rem;
-        }
-        .about-label {
-          margin-bottom: 1rem;
-          font-size: 0.6rem;
-        }
-      }
-
-      /* 375px */
-      @media (max-width: 375px) {
-        #about-sticky-container {
-          padding-top: 1.25rem;
-          padding-bottom: 1.25rem;
-        }
-        .about-label {
-          margin-bottom: 0.75rem;
         }
       }
     </style>
@@ -2111,7 +2214,7 @@
     <section class="section" id="about-trigger">
       <div class="container about" id="about-sticky-container">
         <div class="about-grid">
-          <div>
+          <div class="wrapper">
             <div class="about-label reveal">
               <span class="t-en">Statement</span>
             </div>
