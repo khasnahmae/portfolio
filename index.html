@@ -146,6 +146,27 @@
         transform: translate(-50%, -50%);
         transition: all 0.15s linear;
       }
+      @media (hover: hover) and (pointer: fine) {
+        body,
+        button,
+        .hero-name-drag-wrap {
+          cursor: none !important;
+        }
+      }
+
+      @media (hover: none) and (pointer: coarse) {
+        #cursor,
+        #cursor-trail,
+        .cursor-label {
+          display: none !important;
+          visibility: hidden;
+        }
+
+        body,
+        button {
+          cursor: auto !important;
+        }
+      }
 
       /* LAYOUT */
       .container {
@@ -2640,10 +2661,6 @@
       if (!isTouchDevice) {
         const cursor = document.getElementById("cursor");
         const trail = document.getElementById("cursor-trail");
-        let mouseX = 0,
-          mouseY = 0,
-          posX = 0,
-          posY = 0;
 
         document.addEventListener("mousemove", (e) => {
           mouseX = e.clientX;
@@ -2660,17 +2677,9 @@
           requestAnimationFrame(animateCursor);
         }
         animateCursor();
-
-        document
-          .querySelectorAll("a,button,.exp-card,.stat-item")
-          .forEach((el) => {
-            el.addEventListener("mouseenter", () =>
-              cursor.classList.add("expand"),
-            );
-            el.addEventListener("mouseleave", () =>
-              cursor.classList.remove("expand"),
-            );
-          });
+      } else {
+        document.getElementById("cursor").style.display = "none";
+        document.getElementById("cursor-trail").style.display = "none";
       }
 
       /* === NAV SCROLL === */
