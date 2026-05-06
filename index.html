@@ -20,25 +20,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
       rel="stylesheet"
     />
 
     <style>
       :root {
         --c-ink: #0d0d0f;
+        --c-ink-80: rgba(13, 13, 15, 0.8);
         --c-ink-60: rgba(13, 13, 15, 0.6);
         --c-ink-30: rgba(13, 13, 15, 0.3);
         --c-ink-10: rgba(13, 13, 15, 0.08);
         --c-paper: #f5f3ef;
         --c-white: #ffffff;
-        --c-accent: #01ab6c;
-        --c-accent-dim: #1f835e;
+        --c-accent: #00603d;
+        --c-accent-dim: #003c26;
         --c-muted: #7a7872;
         --c-border: rgba(13, 13, 15, 0.12);
         --c-surface: #edebe6;
-        --font-display: "Fraunces", serif;
-        --font-body: "DM Sans", sans-serif;
+        --font-display: "Poppins", sans-serif;
+        --font-body: "Playfair Display", display;
         --fs-hero: clamp(3rem, 7vw, 7rem);
         --fs-h2: clamp(1.5rem, 3vw, 2.25rem);
         --fs-h3: 1.25rem;
@@ -73,7 +74,7 @@
         overflow-x: hidden;
       }
       body {
-        font-family: var(--font-body);
+        font-family: var(--font-display);
         background: var(--c-paper);
         color: var(--c-ink);
         font-size: var(--fs-body);
@@ -124,7 +125,7 @@
         position: absolute;
         top: 20px;
         left: 14px;
-        background: var(--c-accent-dim);
+        background: #bf360c;
         color: var(--c-white);
         font-size: 11px;
         font-weight: 700;
@@ -164,7 +165,8 @@
         left: 0;
         right: 0;
         z-index: 100;
-        padding: 1.25rem var(--space-md);
+        padding: 1.25rem var(--space-lg);
+        max-width: 1320px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -236,9 +238,9 @@
         align-items: center;
         gap: 1rem;
       }
-      .nav-cta {
-        background: var(--c-ink);
-        color: var(--c-paper);
+      /* .nav-cta {
+        background: var(--c-accent);
+        color: var(--c-white);
         padding: 0.5rem 1.25rem;
         border-radius: var(--r-pill);
         font-size: var(--fs-small);
@@ -249,8 +251,33 @@
         white-space: nowrap;
       }
       .nav-cta:hover {
+        background: var(--c-accent-dim);
+        color: var(--c-white);
+      } */
+      .nav-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         background: var(--c-accent);
-        color: var(--c-ink);
+        color: var(--c-paper);
+        padding: 0.5rem 1.25rem;
+        border-radius: var(--r-pill);
+        font-size: var(--fs-small);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        transition: all var(--dur-mid) var(--ease-out);
+      }
+      .nav-cta:hover {
+        background: var(--c-accent-dim);
+        color: var(--c-white);
+        transform: translateY(-2px);
+      }
+      .nav-cta .arrow {
+        display: inline-block;
+        transition: transform var(--dur-mid) var(--ease-out);
+      }
+      .nav-cta:hover .arrow {
+        transform: translate(3px, -3px);
       }
 
       /* === DRAGGABLE HERO NAME === */
@@ -406,14 +433,6 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         transition: background-color 0.8s ease;
       }
-      .grid-box.active {
-        transition: background-color 0s;
-      }
-      .grid-box:hover {
-        background-color: #55e6a5;
-        transition: background-color 0s ease;
-        border-color: rgba(255, 255, 255, 0.2);
-      }
       .hero-left {
         text-align: center;
         position: relative;
@@ -459,16 +478,19 @@
         font-size: var(--fs-hero);
         font-weight: 800;
         line-height: 0.92;
-        letter-spacing: 0.01em;
+        letter-spacing: -0.02em;
         margin-bottom: 1.5rem;
+        color: var(--c-accent-dim);
       }
       .hero-name:hover {
         border: 1px dashed var(--c-muted);
       }
       .hero-name em {
-        font-style: normal;
-        color: transparent;
-        -webkit-text-stroke: 1px var(--c-ink);
+        font-family: var(--font-body);
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: 0;
+        color: var(--c-accent-dim);
       }
       .hero-desc {
         font-size: 1.125rem;
@@ -487,7 +509,7 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: var(--c-ink);
+        background: var(--c-accent);
         color: var(--c-paper);
         padding: 0.875rem 2rem;
         border-radius: var(--r-pill);
@@ -497,8 +519,8 @@
         transition: all var(--dur-mid) var(--ease-out);
       }
       .btn-primary:hover {
-        background: var(--c-accent);
-        color: var(--c-ink);
+        background: var(--c-accent-dim);
+        color: var(--c-white);
         transform: translateY(-2px);
       }
       .btn-primary .arrow {
@@ -512,8 +534,8 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        border: 1.5px solid var(--c-border);
-        color: var(--c-ink-60);
+        border: 1.5px solid var(--c-accent);
+        color: var(--c-accent);
         padding: 0.875rem 2rem;
         border-radius: var(--r-pill);
         font-size: var(--fs-small);
@@ -521,8 +543,8 @@
         transition: all var(--dur-mid) var(--ease-out);
       }
       .btn-outline:hover {
-        border-color: var(--c-ink);
-        color: var(--c-ink);
+        background-color: var(--c-accent-dim);
+        color: var(--c-paper);
         transform: translateY(-2px);
       }
 
@@ -672,7 +694,7 @@
 
       /* STATS */
       .stats-band {
-        background: var(--c-ink);
+        background: var(--c-accent-dim);
         color: var(--c-white);
         padding: var(--space-lg) 0;
       }
@@ -687,24 +709,24 @@
       }
       .stat-item {
         padding: 2rem 1.5rem;
-        background: var(--c-ink);
+        background: var(--c-accent-dim);
         text-align: center;
         transition: background var(--dur-fast);
       }
-      .stat-item:hover {
+      /* .stat-item:hover {
         background: #1a1a2e;
-      }
+      } */
       .stat-number {
         font-family: var(--font-display);
         font-size: clamp(2rem, 4vw, 3.5rem);
         font-weight: 800;
         line-height: 1;
-        color: var(--c-accent);
+        color: var(--c-white);
         margin-bottom: 0.5rem;
         letter-spacing: -0.04em;
       }
       .stat-label {
-        font-size: var(--fs-small);
+        font-size: var(--fs-xs);
         color: rgba(255, 255, 255, 0.5);
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -735,12 +757,12 @@
         background: var(--c-accent);
       }
       .about-text {
-        color: var(--c-ink);
+        color: var(--c-ink-80);
         font-size: clamp(1.75rem, 4.5vw, 5.5rem);
         font-family: var(--font-display);
         font-weight: 800;
         line-height: 1.08;
-        letter-spacing: 0.01em;
+        letter-spacing: -0.01em;
         position: relative;
         display: block;
         width: 100%;
@@ -754,6 +776,7 @@
         left: -0.01em;
         top: -0.1em;
         opacity: 0.4;
+        color: var(--c-accent-dim);
       }
 
       /* Tanda Petik Penutup */
@@ -764,6 +787,7 @@
         left: 0.1em;
         top: -0.1em;
         opacity: 0.4;
+        color: var(--c-accent-dim);
       }
       .about-visual {
         position: relative;
@@ -777,24 +801,29 @@
         padding-bottom: var(--space-lg);
       }
 
-      /* Section title */
       .section-title {
-        font-family: var(--font-display);
-        font-size: clamp(2rem, 4vw, 3rem);
-        font-weight: 600;
+        font-family: var(--font-display, "Inter", sans-serif);
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        font-weight: 700;
         line-height: 1.1;
         letter-spacing: -0.02em;
-        margin-bottom: 1.5rem;
+        color: #ffffff;
+        margin-bottom: 2rem;
       }
+
       .section-title em {
-        font-style: normal;
-        color: transparent;
-        -webkit-text-stroke: 1px var(--c-ink);
+        font-family: var(--font-body, "Playfair Display", serif);
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: 0;
+        font-size: 1.05em;
+        margin-left: 0.1rem;
+        opacity: 0.95;
       }
 
       /* Typing / About animation */
       #typing-target {
-        font-family: var(--font-body);
+        font-family: var(--font-display);
         color: var(--c-ink-60);
         line-height: 1.6;
         font-size: 1.0625rem;
@@ -802,9 +831,9 @@
       }
       .typing-cursor-blink {
         display: inline-block;
-        width: 8px;
-        height: 0.8em;
-        background-color: rgb(255, 0, 153);
+        width: 6px;
+        height: 1em;
+        background-color: var(--c-accent);
         vertical-align: middle;
         animation: blink-cursor 0.8s step-end infinite;
       }
@@ -955,6 +984,9 @@
         color: var(--c-accent);
         font-weight: 600;
       }
+      .experience .section-title {
+        color: var(--c-ink);
+      }
 
       /* CONTACT */
       .contact-section {
@@ -1101,7 +1133,7 @@
 
       /* SLIDES / PROJECTS */
       .slides-section {
-        background: var(--c-ink);
+        background: var(--c-accent-dim);
         padding: 0;
       }
       .slides-section-header {
@@ -1111,12 +1143,6 @@
         z-index: 2;
         max-width: 1320px;
         margin: 0 auto;
-      }
-      .slides-section-header .section-title {
-        color: var(--c-white);
-      }
-      .slides-section-header .section-title em {
-        -webkit-text-stroke: 1.5px var(--c-white);
       }
       .slides-label {
         font-size: var(--fs-xs);
@@ -1141,21 +1167,28 @@
         padding-top: var(--space-md);
         padding-bottom: var(--space-xl);
       }
-      .slide-panel {
-        width: 100%;
-        min-height: 400px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-        background-color: var(--c-ink);
-        border: 1px solid var(--c-accent-dim);
-        overflow: hidden;
-        border-radius: var(--r-xl);
-        margin-bottom: var(--space-lg);
-      }
       .slide-panel:last-child {
         margin-bottom: 0;
+      }
+
+      /* Each subsequent card stacks on top visually */
+      .slide-panel:nth-child(1) {
+        z-index: 1;
+      }
+      .slide-panel:nth-child(2) {
+        z-index: 2;
+      }
+      .slide-panel:nth-child(3) {
+        z-index: 3;
+      }
+      .slide-panel:nth-child(4) {
+        z-index: 4;
+      }
+      .slide-panel:nth-child(5) {
+        z-index: 5;
+      }
+      .slide-panel:nth-child(6) {
+        z-index: 6;
       }
       .slide-panel .slide-content {
         width: 100%;
@@ -1164,28 +1197,36 @@
         align-items: center;
         overflow: hidden;
       }
-      .slide-panel .slide-inner {
+      .slide-panel {
         width: 100%;
-        height: 100%;
+        min-height: 450px;
+        display: flex;
+        background-color: var(--c-paper);
         overflow: hidden;
+        border-radius: var(--r-xl);
+        border: 1px solid var(--c-border);
+        margin-bottom: var(--space-lg);
+        will-change: transform, box-shadow;
+      }
+
+      .slide-panel .slide-inner {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        align-items: center;
-        gap: 0;
+        width: 100%;
         direction: rtl;
       }
       .slide-panel .slide-text-side {
-        color: var(--c-white);
+        color: var(--c-ink);
         direction: ltr;
       }
       .slide-panel .slide-proj-type {
-        color: rgba(255, 255, 255, 0.45);
+        color: var(--c-ink-60);
       }
       .slide-panel .slide-proj-desc {
-        color: rgba(255, 255, 255, 0.6);
+        color: var(--c-ink-80);
       }
       .slide-panel .slide-proj-title {
-        color: var(--c-white);
+        color: var(--c-ink);
       }
       .slide-panel .slide-img-side {
         direction: ltr;
@@ -1194,7 +1235,6 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(to right, rgba(0, 0, 0, 0.25), transparent);
         pointer-events: none;
       }
       .slide-panel .slide-proj-tag {
@@ -1247,7 +1287,7 @@
         font-size: clamp(1.75rem, 3vw, 3rem);
         font-weight: 800;
         line-height: 1.05;
-        letter-spacing: -0.03em;
+        letter-spacing: -0.02em;
         margin-bottom: 1.25rem;
         color: inherit;
       }
@@ -1365,7 +1405,15 @@
           padding-bottom: var(--space-lg);
         }
         .slide-panel {
-          height: 400px;
+          height: auto;
+          min-height: min-content;
+          margin-bottom: var(--space-md);
+        }
+        .slide-text-side {
+          padding: 2.5rem;
+        }
+        .slide-proj-title {
+          font-size: 2.25rem;
         }
         .slide-panel .slide-inner {
           display: grid;
@@ -1379,10 +1427,6 @@
           width: 100%;
           height: 100%;
           object-fit: cover;
-        }
-        .slide-text-side {
-          padding: 3rem;
-          height: auto;
         }
         .contact-heading {
           font-size: clamp(2.5rem, 6vw, 5rem);
@@ -1433,6 +1477,10 @@
         .stats-grid {
           grid-template-columns: repeat(2, 1fr);
         }
+        .section-title {
+          font-size: 3.5rem;
+          letter-spacing: -0.02em;
+        }
         .about-grid {
           grid-template-columns: 1fr;
           gap: var(--space-lg);
@@ -1448,11 +1496,12 @@
           justify-content: center;
         }
         .about-text {
-          font-size: clamp(1.6rem, 4vw, 2.4rem);
+          font-size: clamp(2.3rem, 4.2vw, 2.6rem);
           line-height: 1.25;
           text-align: center;
           width: 100%;
           display: block;
+          padding-inline: var(--space-lg);
         }
         .about-text-wrapper {
           width: 100%;
@@ -1468,6 +1517,9 @@
         }
         #about-trigger {
           min-height: 400vh;
+        }
+        .hero-visual {
+          display: none;
         }
         .typing-container {
           position: relative;
@@ -1498,9 +1550,26 @@
         }
         .slide-img-side {
           order: 1;
+          width: 100%;
+          height: 100%;
+          background-image: url("path-ke-foto-anda.jpg");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
         }
         .slide-text-side {
           order: 2;
+          padding: 2rem;
+          height: auto;
+          overflow: visible;
+        }
+        .slide-panel {
+          position: relative !important;
+          top: auto !important;
+          transform: none !important;
+          margin-bottom: var(--space-md);
+          height: auto;
+          min-height: min-content;
         }
         .contact-footer {
           flex-direction: column;
@@ -1554,7 +1623,8 @@
           padding: 1.5rem 1rem;
         }
         .section-title {
-          font-size: clamp(1.5rem, 5vw, 2.25rem);
+          font-size: 3rem;
+          margin-bottom: 1.5rem;
         }
         .about-text {
           font-size: clamp(1.4rem, 4vw, 2.2rem);
@@ -1614,6 +1684,9 @@
           border-radius: var(--r-lg);
           margin-bottom: var(--space-md);
           height: auto;
+          position: relative !important;
+          top: auto !important;
+          transform: none !important;
         }
         .slide-inner {
           display: flex;
@@ -1622,9 +1695,18 @@
         }
         .slide-img-side {
           order: 1;
+          width: 100%;
+          height: 100%;
+          background-image: url("path-ke-foto-anda.jpg");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
         }
         .slide-text-side {
           order: 2;
+          padding: 1.5rem;
+          height: auto;
+          overflow: visible;
         }
         .slide-proj-title {
           font-size: clamp(1.375rem, 4vw, 2rem);
@@ -1723,8 +1805,11 @@
           padding: 1.25rem 0.75rem;
         }
         .section-title {
-          font-size: clamp(1.375rem, 7vw, 2rem);
-          margin-bottom: 1rem;
+          font-size: 2.5rem;
+          line-height: 1.2;
+        }
+        .section-title em {
+          margin-left: 0;
         }
         .about-text {
           font-size: clamp(1.25rem, 4.5vw, 1.75rem);
@@ -1791,6 +1876,10 @@
         .slide-panel {
           height: auto;
           margin-bottom: var(--space-md);
+          position: relative !important;
+          top: auto !important;
+          transform: none !important;
+          border-radius: var(--r-md);
         }
         .slide-inner {
           display: flex !important;
@@ -1801,11 +1890,11 @@
         .slide-img-side {
           order: 1;
           width: 100%;
-          height: auto;
+          height: 300px;
         }
         .slide-img-side img {
           width: 100%;
-          height: auto;
+          height: 100%;
           object-fit: cover;
         }
         .slide-text-side {
@@ -1813,6 +1902,7 @@
           padding: 1.25rem;
           height: auto;
           overflow: visible;
+          width: 100%;
         }
         .contact-section {
           padding: 3.5rem 0 2rem;
@@ -1896,7 +1986,8 @@
           padding: 1rem 0.5rem;
         }
         .section-title {
-          font-size: clamp(1.25rem, 8vw, 1.75rem);
+          font-size: 2.2rem;
+          letter-spacing: -0.01em;
         }
         .about-text {
           font-size: clamp(1.125rem, 4vw, 1.5rem);
@@ -1964,11 +2055,21 @@
           flex-direction: column !important;
           direction: ltr !important;
         }
+        .slide-panel {
+          position: relative !important;
+          top: auto !important;
+          transform: none !important;
+          margin-bottom: 1rem;
+          border-radius: var(--r-md);
+        }
         .slide-img-side {
-          height: auto;
+          height: 180px;
+          width: 100%;
         }
         .slide-img-side img {
-          height: auto;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
         .slide-text-side {
           padding: 1rem;
@@ -2024,7 +2125,7 @@
       >
         <path
           d="M5.65376 12.3673H5.46026L5.31717 12.4976L0.500002 16.8829L0.500002 1.19841L11.7841 12.3673H5.65376Z"
-          fill="#01ab6c"
+          fill="#BF360C"
           stroke="white"
           stroke-width="1"
         />
@@ -2068,8 +2169,8 @@
           href="https://wa.me/6288706608471?text=Hello,%20I%20am%20interested%20in%20your%20services"
           class="nav-cta"
         >
-          <span class="t-en">Let's Talk →</span
-          ><span class="t-id">Hubungi →</span>
+          <span class="t-en">Let's Talk</span><span class="arrow">↗</span>
+          <span class="t-id">Hubungi →</span>
         </a>
         <button
           class="nav-hamburger"
@@ -2114,8 +2215,8 @@
         style="display: inline-flex"
         onclick="closeMobileNav()"
       >
-        <span class="t-en">Let's Talk →</span
-        ><span class="t-id">Hubungi →</span>
+        <span class="t-en">Let's Talk</span><span class="arrow">↗</span>
+        <span class="t-id">Hubungi →</span>
       </a>
     </div>
 
@@ -2266,7 +2367,7 @@
           class="section-title reveal reveal-delay-1"
           style="text-align: center; color: var(--c-white)"
         >
-          <span class="t-en">Work that<br /><em>speaks</em></span>
+          <span class="t-en">Work that <em>speaks</em></span>
           <span class="t-id">Karya yang<br /><em>berbicara</em></span>
         </h2>
       </div>
@@ -2529,7 +2630,7 @@
           ><span class="t-id">Pengalaman</span>
         </div>
         <h2 class="section-title reveal reveal-delay-1">
-          <span class="t-en">Where I've<br /><em>worked</em></span>
+          <span class="t-en">Where I've <em>worked</em></span>
           <span class="t-id">Tempat saya<br /><em>berkarya</em></span>
         </h2>
         <div style="height: var(--space-md)"></div>
@@ -2835,6 +2936,8 @@
 
       /* === STACKING SLIDE PANELS === */
       document.addEventListener("DOMContentLoaded", function () {
+        const TOP_OFFSET = 100;
+
         function initStackingPanels() {
           ScrollTrigger.getAll()
             .filter((st) => st.vars && st.vars._isSlidePanel)
@@ -2842,75 +2945,76 @@
 
           gsap.utils.toArray(".slide-panel").forEach((p) => {
             p.style.marginBottom = "";
+            gsap.set(p, { clearProps: "all" });
           });
 
           if (window.innerWidth <= 1024) return;
 
           const panels = gsap.utils.toArray(".slide-panel");
-          const pinnedPanels = panels.slice(0, panels.length - 1);
 
-          pinnedPanels.forEach(function (panel) {
-            const innerPanel = panel.querySelector(".slide-inner");
-            const panelHeight = innerPanel.scrollHeight;
-            const windowHeight = window.innerHeight;
-            const difference = panelHeight - windowHeight;
-            const fakeScrollRatio =
-              difference > 0 ? difference / (difference + windowHeight) : 0;
+          panels.forEach((panel, i) => {
+            const isLast = i === panels.length - 1;
 
-            if (fakeScrollRatio) {
-              panel.style.marginBottom = panelHeight * fakeScrollRatio + "px";
-            }
-
-            const tl = gsap.timeline({
-              scrollTrigger: {
-                trigger: panel,
-                start: "center center",
-                end: () =>
-                  fakeScrollRatio
-                    ? "+=" + innerPanel.scrollHeight
-                    : "center top",
-                pinSpacing: false,
-                pin: true,
-                scrub: true,
-                _isSlidePanel: true,
-              },
+            ScrollTrigger.create({
+              trigger: panel,
+              start: `top ${TOP_OFFSET}px`,
+              endTrigger: panels[panels.length - 1],
+              end: `top ${TOP_OFFSET}px`,
+              pin: true,
+              pinSpacing: false,
+              anticipatePin: 1,
+              _isSlidePanel: true,
             });
 
-            if (fakeScrollRatio) {
-              tl.to(innerPanel, {
-                yPercent: -100,
-                y: window.innerHeight,
-                duration: 1 / (1 - fakeScrollRatio) - 1,
-                ease: "none",
-              });
-            }
+            if (!isLast) {
+              const nextPanel = panels[i + 1];
 
-            tl.fromTo(
-              panel,
-              { scale: 1, opacity: 1, filter: "brightness(1)" },
-              {
-                scale: 0.8,
-                opacity: 0,
-                filter: "brightness(0.5)",
-                duration: 6,
+              gsap.to(panel, {
                 ease: "none",
-              },
-            );
+                scrollTrigger: {
+                  trigger: nextPanel,
+                  start: `top 100%`,
+                  end: `top ${TOP_OFFSET}px`,
+                  scrub: true,
+                },
+              });
+
+              const shadowTl = gsap.timeline({
+                scrollTrigger: {
+                  trigger: nextPanel,
+                  start: `top 100%`,
+                  end: `top ${TOP_OFFSET}px`,
+                  scrub: true,
+                  _isSlidePanel: true,
+                },
+              });
+
+              shadowTl
+                .to(nextPanel, {
+                  boxShadow: "0px -30px 60px rgba(0,0,0,0.1)",
+                  duration: 0.5,
+                  ease: "power2.out",
+                })
+                .to(nextPanel, {
+                  boxShadow: "0px 0px 0px rgba(0,0,0,0)",
+                  duration: 0.5,
+                  ease: "power2.in",
+                });
+            }
           });
         }
 
-        initStackingPanels();
+        gsap.delayedCall(0.1, initStackingPanels);
 
         let resizeTimer;
         window.addEventListener("resize", function () {
           clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(function () {
-            ScrollTrigger.refresh();
+          resizeTimer = setTimeout(() => {
             initStackingPanels();
-          }, 300);
+            ScrollTrigger.refresh();
+          }, 400);
         });
       });
-
       /* === SCROLL REVEAL === */
       const observer = new IntersectionObserver(
         (entries) => {
@@ -2931,14 +3035,6 @@
       document.addEventListener("DOMContentLoaded", () => {
         const grid = document.getElementById("interactiveGrid");
         const boxSize = 72;
-        const colors = [
-          "#55e6a5",
-          "#f555e6",
-          "#f5a855",
-          "#55a0e6",
-          "#e6e655",
-          "#ff5f5f",
-        ];
 
         function createGrid() {
           grid.innerHTML = "";
@@ -2953,19 +3049,6 @@
           grid.appendChild(fragment);
         }
 
-        grid.addEventListener("mouseover", (e) => {
-          if (e.target.classList.contains("grid-box")) {
-            const box = e.target;
-            box.style.backgroundColor =
-              colors[Math.floor(Math.random() * colors.length)];
-            box.classList.add("active");
-            setTimeout(() => {
-              box.style.backgroundColor = "";
-              box.classList.remove("active");
-            }, 50);
-          }
-        });
-
         createGrid();
 
         let gridResizeTimer;
@@ -2974,10 +3057,8 @@
           gridResizeTimer = setTimeout(createGrid, 200);
         });
       });
-
       /* === DRAGGABLE HERO NAME === */
       (function () {
-        // Disable drag feature on touch devices
         if (window.matchMedia("(hover: none) and (pointer: coarse)").matches)
           return;
 
@@ -3010,7 +3091,7 @@
 
         const messages = [
           "Nice try, but I like it where it was.",
-          "Hey! That's my name, put it back!",
+          "That's my name, put it back!",
           "Oi, I need that name over here!",
           "I spent hours on that alignment.",
           "Stop breaking my layout, please!",
