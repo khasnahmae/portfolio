@@ -111,7 +111,7 @@
         display: inline;
       }
 
-      /* === CUSTOM CURSOR === */
+      /* CUSTOM CURSOR  */
       #cursor {
         position: fixed;
         left: 0;
@@ -150,7 +150,7 @@
 
       /* LAYOUT */
       .container {
-        max-width: 1320px;
+        /* max-width: 1320px; */
         margin: 0 auto;
         padding: 0 var(--space-md);
       }
@@ -165,8 +165,9 @@
         left: 0;
         right: 0;
         z-index: 100;
-        padding: 1.25rem var(--space-lg);
-        max-width: 1320px;
+        padding: 1.25rem var(--space-md);
+        margin: 0 auto;
+        /* max-width: 1320px; */
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -182,25 +183,41 @@
       .nav-left {
         display: flex;
         align-items: center;
-        gap: 1.25rem;
       }
-      .nav-logo {
+
+      .nav-profile {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .nav-profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        object-position: top;
+
+        border: 2px solid rgba(255, 255, 255, 0.2);
+
+        box-shadow:
+          0 4px 12px rgba(0, 0, 0, 0.15),
+          inset 0 1px 2px rgba(255, 255, 255, 0.15);
+
+        transition: 0.3s ease;
+      }
+
+      .nav-profile img:hover {
+        transform: scale(1.05);
+      }
+
+      .nav-profile span {
         font-family: var(--font-display);
-        font-weight: 700;
-        font-size: 1.125rem;
-        letter-spacing: -0.02em;
-      }
-      .nav-logo span {
-        display: inline-block;
-        background: var(--c-accent);
-        color: var(--c-white);
-        padding: 2px 8px;
-        border-radius: var(--r-sm);
-        margin-left: 4px;
-        font-size: 0.75rem;
+        font-size: var(--fs-body);
         font-weight: 600;
-        letter-spacing: 0.05em;
-        vertical-align: middle;
+        color: var(--c-ink-80);
+        letter-spacing: -0.5px;
+        margin: 0;
       }
       .nav-links {
         display: flex;
@@ -238,22 +255,6 @@
         align-items: center;
         gap: 1rem;
       }
-      /* .nav-cta {
-        background: var(--c-accent);
-        color: var(--c-white);
-        padding: 0.5rem 1.25rem;
-        border-radius: var(--r-pill);
-        font-size: var(--fs-small);
-        font-weight: 500;
-        transition:
-          background var(--dur-fast),
-          transform var(--dur-fast);
-        white-space: nowrap;
-      }
-      .nav-cta:hover {
-        background: var(--c-accent-dim);
-        color: var(--c-white);
-      } */
       .nav-cta {
         display: inline-flex;
         align-items: center;
@@ -280,7 +281,7 @@
         transform: translate(3px, -3px);
       }
 
-      /* === DRAGGABLE HERO NAME === */
+      /* DRAGGABLE HERO NAME */
       .hero-name-drag-wrap {
         position: relative;
         display: flex;
@@ -429,9 +430,15 @@
       .grid-box {
         width: 100%;
         height: 100%;
-        border-right: 1px solid rgba(0, 0, 0, 0.05);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        transition: background-color 0.8s ease;
+        border-right: 1px solid rgba(0, 0, 0, 0.07);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+        transition: background-color 1s ease;
+        background-color: transparent;
+      }
+      .grid-box:hover {
+        background-color: #55e6a5;
+        transition: background-color 0s ease;
+        border-color: rgba(255, 255, 255, 0.2);
       }
       .hero-left {
         text-align: center;
@@ -547,60 +554,6 @@
         color: var(--c-paper);
         transform: translateY(-2px);
       }
-
-      .hero-card {
-        background: var(--c-white);
-        border-radius: var(--r-xl);
-        border: 1px solid var(--c-border);
-        overflow: hidden;
-        position: relative;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-self: stretch;
-        min-height: 380px;
-      }
-      .hero-card-inner {
-        flex: 1;
-        width: 100%;
-        background: url("images/me2.png") center/cover no-repeat;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 2rem;
-      }
-      .hero-card-inner::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.7),
-          rgba(0, 0, 0, 0.2),
-          transparent
-        );
-        z-index: 0;
-      }
-      .hero-card-orb {
-        position: absolute;
-        border-radius: 50%;
-        background: var(--c-accent);
-        opacity: 0.15;
-        animation: float 6s ease-in-out infinite;
-      }
-      .hero-card-orb-1 {
-        width: 200px;
-        height: 200px;
-        top: -60px;
-        right: -60px;
-      }
-      .hero-card-orb-2 {
-        width: 120px;
-        height: 120px;
-        bottom: 80px;
-        left: -40px;
-        animation-delay: -3s;
-      }
       @keyframes float {
         0%,
         100% {
@@ -610,41 +563,7 @@
           transform: translateY(-20px);
         }
       }
-      .hero-card-name {
-        font-family: var(--font-display);
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--c-white);
-        position: relative;
-        z-index: 1;
-        margin-bottom: 0.25rem;
-      }
-      .hero-card-role {
-        font-size: var(--fs-small);
-        color: rgba(255, 255, 255, 0.6);
-        position: relative;
-        z-index: 1;
-      }
-      .hero-badge {
-        position: absolute;
-        background: var(--c-accent);
-        border-radius: var(--r-lg);
-        padding: 0.75rem 1rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: var(--fs-xs);
-        font-weight: 600;
-        color: var(--c-ink);
-        box-shadow: 0 8px 24px rgba(200, 247, 62, 0.3);
-        white-space: nowrap;
-      }
-      .hero-badge-2 {
-        top: 30px;
-        right: 30px;
-        background: var(--c-white);
-        border: 1px solid var(--c-border);
-      }
+
       .hero-ticker {
         position: relative;
         z-index: 1;
@@ -713,9 +632,7 @@
         text-align: center;
         transition: background var(--dur-fast);
       }
-      /* .stat-item:hover {
-        background: #1a1a2e;
-      } */
+
       .stat-number {
         font-family: var(--font-display);
         font-size: clamp(2rem, 4vw, 3.5rem);
@@ -734,19 +651,30 @@
 
       /* ABOUT */
       .about-grid {
-        display: grid;
-        grid-template-columns: 1.4fr 1fr;
-        gap: var(--space-xl);
-        align-items: start;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-md);
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .about-grid .wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       .about-label {
         font-size: var(--fs-xs);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         color: var(--c-muted);
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
       }
       .about-label::before,
@@ -758,17 +686,17 @@
       }
       .about-text {
         color: var(--c-ink-80);
-        font-size: clamp(1.75rem, 4.5vw, 5.5rem);
+        font-size: clamp(1.4rem, 3.5vw, 3.2rem);
         font-family: var(--font-display);
         font-weight: 800;
-        line-height: 1.08;
+        line-height: 1.15;
         letter-spacing: -0.01em;
+        text-align: center;
         position: relative;
         display: block;
         width: 100%;
       }
 
-      /* Tanda Petik Pembuka */
       .about-text::before {
         content: "\201C";
         font-family: var(--font-display);
@@ -779,7 +707,6 @@
         color: var(--c-accent-dim);
       }
 
-      /* Tanda Petik Penutup */
       .about-text::after {
         content: "\201D";
         font-family: var(--font-display);
@@ -795,10 +722,14 @@
       .about-text-wrapper {
         display: block;
         width: 100%;
+        text-align: center;
       }
       #about-sticky-container {
         padding-top: var(--space-lg);
         padding-bottom: var(--space-lg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       .section-title {
@@ -890,7 +821,7 @@
         margin-left: 8px;
       }
 
-      /* EXPERIENCE */
+      /* EXPERIENCE — ROADMAP */
       .exp-label {
         font-size: var(--fs-xs);
         letter-spacing: 0.12em;
@@ -899,6 +830,8 @@
         margin-bottom: 2rem;
         display: flex;
         align-items: center;
+        text-align: center;
+        justify-content: center;
         gap: 8px;
       }
       .exp-label::before,
@@ -908,89 +841,274 @@
         height: 1.5px;
         background: var(--c-accent);
       }
-      .exp-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: var(--space-md);
+      .experience .section-title {
+        color: var(--c-ink);
+        text-align: center;
+        justify-content: center;
       }
-      .exp-card {
+
+      /* Roadmap wrapper */
+      .roadmap {
+        position: relative;
+        margin-top: var(--space-lg);
+        max-width: 820px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* SVG path sits behind cards */
+      .roadmap-svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: visible;
+      }
+
+      /* The animated winding path */
+      .roadmap-path {
+        /* fill: none;
+        stroke: var(--c-border);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 4000;
+        stroke-dashoffset: 4000;
+        transition: stroke-dashoffset 0s; */
+        display: none;
+      }
+
+      /* Glowing progress line drawn on top */
+      .roadmap-path-progress {
+        fill: none;
+        stroke: var(--c-accent);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0.5;
+        stroke-dasharray: 4000;
+        stroke-dashoffset: 4000;
+        transition: stroke-dashoffset 0s;
+      }
+
+      /* Roadmap rows — alternating left/right */
+      .roadmap-row {
+        display: flex;
+        align-items: center;
+        position: relative;
+        min-height: 180px;
+        margin-bottom: var(--space-lg);
+      }
+
+      /* Card */
+      .roadmap-card {
+        width: calc(50% - 52px);
         background: var(--c-white);
         border-radius: var(--r-xl);
-        padding: 2rem;
-        border: 1px solid var(--c-border);
+        padding: 1.75rem 2rem;
         position: relative;
-        transition: transform var(--dur-mid) var(--ease-out);
+        will-change: transform, opacity;
+        /* initial hidden state — set by JS per side */
       }
-      .exp-card:hover {
-        transform: translateY(-4px);
+
+      /* Tail arrow from card to dot */
+      .roadmap-card::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
       }
-      .exp-card--accent {
-        background: var(--c-ink);
+
+      /* Row: odd — card left, dot right */
+      .roadmap-row:nth-child(odd) {
+        flex-direction: row;
+      }
+      .roadmap-row:nth-child(odd) .roadmap-card {
+        margin-right: auto;
+      }
+      .roadmap-row:nth-child(odd) .roadmap-card::after {
+        right: -10px;
+        border-left: 10px solid var(--c-border);
+      }
+
+      /* Row: even — card right, dot left */
+      .roadmap-row:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+      .roadmap-row:nth-child(even) .roadmap-card {
+        margin-left: auto;
+      }
+      .roadmap-row:nth-child(even) .roadmap-card::after {
+        left: -10px;
+        border-right: 10px solid var(--c-border);
+        border-left: none;
+      }
+
+      /* Dot node */
+      .roadmap-node {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--c-paper);
+        border: 2px solid var(--c-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        flex-shrink: 0;
+        transition:
+          border-color 400ms var(--ease-out),
+          background 400ms var(--ease-out),
+          box-shadow 400ms var(--ease-out),
+          transform 400ms var(--ease-out);
+      }
+      .roadmap-node span {
         color: var(--c-white);
-        border-color: var(--c-ink);
+        /* opacity: 0.35; */
+        transition: opacity 400ms var(--ease-out);
       }
-      .exp-period {
+
+      /* Node active state */
+      .roadmap-row.rm-active .roadmap-node {
+        border-color: var(--c-accent);
+        background: var(--c-accent);
+        box-shadow: 0 0 0 6px rgba(0, 96, 61, 0.12);
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      .roadmap-row.rm-active .roadmap-node span {
+        opacity: 1;
+      }
+      /* Current entry (accent) */
+      .roadmap-row.rm-accent .roadmap-node {
+        border-color: var(--c-accent);
+        background: var(--c-accent);
+        box-shadow: 0 0 0 8px rgba(0, 96, 61, 0.15);
+      }
+
+      /* Card animation — slide from left or right + fade */
+      .roadmap-card {
+        opacity: 0;
+        transition:
+          opacity 550ms var(--ease-out),
+          transform 550ms var(--ease-out);
+      }
+      .roadmap-row:nth-child(odd) .roadmap-card {
+        transform: translateX(-36px);
+      }
+      .roadmap-row:nth-child(even) .roadmap-card {
+        transform: translateX(36px);
+      }
+      .roadmap-row.rm-active .roadmap-card {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      /* Exit: reverse slide */
+      .roadmap-row.rm-exit.roadmap-row:nth-child(odd) .roadmap-card {
+        opacity: 0;
+        transform: translateX(-28px);
+      }
+      .roadmap-row.rm-exit.roadmap-row:nth-child(even) .roadmap-card {
+        opacity: 0;
+        transform: translateX(28px);
+      }
+
+      /* Card internals */
+      .rm-period {
         font-size: var(--fs-xs);
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--c-muted);
-        margin-bottom: 0.75rem;
+        color: var(--c-accent);
+        font-weight: 400;
+        margin-bottom: 0.5rem;
         display: flex;
         align-items: center;
         gap: 6px;
       }
-      .exp-card--accent .exp-period {
-        color: rgba(255, 255, 255, 0.4);
-      }
-      .exp-period-bar {
+      .rm-period::before {
+        content: "";
+        display: inline-block;
+        width: 16px;
         height: 2px;
-        width: 20px;
         background: var(--c-accent);
-        border-radius: var(--r-pill);
+        border-radius: 2px;
+        flex-shrink: 0;
       }
-      .exp-role {
+      .rm-role {
         font-family: var(--font-display);
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-size: 1.1rem;
+        font-weight: 600;
         letter-spacing: -0.02em;
-        margin-bottom: 0.25rem;
         line-height: 1.3;
+        color: var(--c-ink);
+        margin-bottom: 1rem;
       }
-      .exp-company {
+      .rm-company {
         font-size: var(--fs-small);
         color: var(--c-muted);
-        margin-bottom: 1rem;
         font-weight: 500;
+        margin-bottom: 0.875rem;
       }
-      .exp-card--accent .exp-company {
-        color: var(--c-accent);
-      }
-      .exp-desc {
+      .rm-desc {
         font-size: var(--fs-small);
         color: var(--c-ink-60);
-        line-height: 1.7;
+        line-height: 1.75;
       }
-      .exp-card--accent .exp-desc {
-        color: rgba(255, 255, 255, 0.6);
-      }
-      .exp-tag {
+      .rm-tag {
         display: inline-flex;
         margin-top: 1rem;
         padding: 4px 12px;
-        background: rgba(200, 247, 62, 0.15);
-        border: 1px solid rgba(200, 247, 62, 0.25);
+        background: rgba(0, 96, 61, 0.08);
+        border: 1px solid rgba(0, 96, 61, 0.18);
         border-radius: var(--r-pill);
         font-size: var(--fs-xs);
         color: var(--c-accent);
         font-weight: 600;
+        letter-spacing: 0.04em;
       }
-      .experience .section-title {
-        color: var(--c-ink);
+      /* Accent card variant */
+      .roadmap-row.rm-accent .roadmap-card {
+        background: var(--c-accent-dim);
+        border-color: var(--c-accent-dim);
+      }
+      .roadmap-row.rm-accent .rm-role {
+        color: var(--c-white);
+      }
+      .roadmap-row.rm-accent .rm-company {
+        color: var(--c-paper);
+      }
+      .roadmap-row.rm-accent .rm-desc {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .roadmap-row.rm-accent .rm-period {
+        color: var(--c-paper);
+      }
+      .roadmap-row.rm-accent .rm-tag {
+        color: var(--c-accent-dim);
+        background: var(--c-paper);
+      }
+      .roadmap-row.rm-accent .rm-period::before {
+        background: var(--c-paper);
+      }
+      .roadmap-row.rm-accent .roadmap-card::after {
+        border-left-color: var(--c-accent-dim);
+      }
+      .roadmap-row.rm-accent:nth-child(even) .roadmap-card::after {
+        border-right-color: var(--c-accent-dim);
       }
 
       /* CONTACT */
       .contact-section {
-        background: var(--c-ink);
+        background: var(--c-accent-dim);
         color: var(--c-white);
         padding: var(--space-xl) 0 var(--space-lg);
         position: relative;
@@ -1002,12 +1120,12 @@
         background-image:
           radial-gradient(
             ellipse 60% 50% at 80% 20%,
-            rgba(200, 247, 62, 0.08) 0%,
+            rgba(200, 247, 62, 0.1) 0%,
             transparent 60%
           ),
           radial-gradient(
             ellipse 50% 60% at 20% 80%,
-            rgba(200, 247, 62, 0.05) 0%,
+            rgba(200, 247, 62, 0.1) 0%,
             transparent 60%
           );
       }
@@ -1020,7 +1138,7 @@
         font-size: var(--fs-xs);
         letter-spacing: 0.12em;
         text-transform: uppercase;
-        color: var(--c-muted);
+        color: var(--c-white);
         margin-bottom: 2rem;
         display: flex;
         align-items: center;
@@ -1036,18 +1154,24 @@
       }
       .contact-heading {
         font-family: var(--font-display);
-        font-size: clamp(3rem, 7vw, 6rem);
-        font-weight: 800;
-        line-height: 0.95;
+        font-size: clamp(2.5rem, 6.5vw, 5.5rem);
+        font-weight: 700;
+        line-height: 1.1;
         letter-spacing: -0.02em;
         margin-bottom: 2rem;
       }
-      .contact-heading span {
-        color: var(--c-accent);
+      .contact-heading em {
+        font-family: var(--font-body, "Playfair Display", serif);
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: 0;
+        font-size: 1.05em;
+        margin-left: 0.1rem;
+        opacity: 0.95;
       }
       .contact-sub {
         font-size: 1.125rem;
-        color: rgba(255, 255, 255, 0.5);
+        color: var(--c-surface);
         line-height: 1.7;
         margin-bottom: 2rem;
         align-items: center;
@@ -1062,9 +1186,9 @@
         font-family: var(--font-display);
         font-size: clamp(1.125rem, 2.5vw, 1.75rem);
         font-weight: 700;
-        color: var(--c-accent);
-        border-bottom: 2px solid rgba(200, 247, 62, 0.3);
-        padding-bottom: 0.5rem;
+        color: var(--c-paper);
+        border-bottom: 1px solid rgba(200, 247, 62, 0.3);
+        padding-bottom: 0.2rem;
         margin-bottom: 3rem;
         transition: all var(--dur-fast);
       }
@@ -1092,7 +1216,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: rgba(255, 255, 255, 0.5);
+        color: var(--c-paper);
         font-size: var(--fs-xs);
         font-weight: 700;
         letter-spacing: 0.05em;
@@ -1100,12 +1224,12 @@
       }
       .social-link:hover {
         border-color: var(--c-accent);
-        color: var(--c-accent);
+        color: var(--c-white);
         background: rgba(200, 247, 62, 0.08);
       }
       .contact-copy {
         font-size: var(--fs-xs);
-        color: rgba(255, 255, 255, 0.3);
+        color: var(--c-paper);
         letter-spacing: 0.05em;
       }
 
@@ -1141,7 +1265,7 @@
         text-align: center;
         position: relative;
         z-index: 2;
-        max-width: 1320px;
+        /* max-width: 1320px; */
         margin: 0 auto;
       }
       .slides-label {
@@ -1226,7 +1350,7 @@
         color: var(--c-ink-80);
       }
       .slide-panel .slide-proj-title {
-        color: var(--c-ink);
+        color: var(--c-accent-dim);
       }
       .slide-panel .slide-img-side {
         direction: ltr;
@@ -1286,10 +1410,9 @@
         font-family: var(--font-display);
         font-size: clamp(1.75rem, 3vw, 3rem);
         font-weight: 800;
-        line-height: 1.05;
+        line-height: 1.1;
         letter-spacing: -0.02em;
         margin-bottom: 1.25rem;
-        color: inherit;
       }
       .slide-proj-desc {
         font-size: 0.9375rem;
@@ -1312,7 +1435,11 @@
         border: 1px solid rgba(1, 171, 108, 0.35);
         color: var(--c-accent);
       }
-
+      #navbar {
+        z-index: 1000;
+        position: fixed;
+        width: 100%;
+      }
       /* HAMBURGER MENU */
       .nav-hamburger {
         display: none;
@@ -1324,7 +1451,11 @@
         cursor: pointer;
         padding: 4px;
         border-radius: var(--r-sm);
-        z-index: 200;
+        z-index: 1100 !important;
+        position: relative;
+      }
+      .nav-hamburger.open span {
+        background: var(--c-ink) !important;
       }
       .nav-hamburger span {
         display: block;
@@ -1337,21 +1468,23 @@
       .nav-hamburger.open span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
       }
+
       .nav-hamburger.open span:nth-child(2) {
         opacity: 0;
-        transform: scaleX(0);
+        transform: translateX(-10px);
       }
+
       .nav-hamburger.open span:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
       }
 
       /* Mobile nav drawer */
       .nav-mobile-drawer {
-        display: none;
+        display: flex;
         position: fixed;
         inset: 0;
         background: var(--c-paper);
-        z-index: 150;
+        z-index: 900;
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -1371,9 +1504,7 @@
         font-size: 1.5rem;
       }
 
-      /* =============================================
-         BREAKPOINT: 1024px — Large tablet / small laptop
-      ============================================= */
+      /* BREAKPOINT: 1024px — Large tablet / small laptop */
       @media (max-width: 1024px) {
         :root {
           --space-xl: 6rem;
@@ -1397,9 +1528,8 @@
           grid-template-columns: 1.2fr 1fr;
           gap: var(--space-md);
         }
-        .exp-grid {
-          grid-template-columns: 1fr 1fr;
-          gap: 1.5rem;
+        .roadmap {
+          max-width: 720px;
         }
         .slides-section {
           padding-bottom: var(--space-lg);
@@ -1433,9 +1563,7 @@
         }
       }
 
-      /* =============================================
-         BREAKPOINT: 900px — Tablet landscape
-      ============================================= */
+      /* BREAKPOINT: 900px — Tablet landscape */
       @media (max-width: 900px) {
         :root {
           --space-xl: 5rem;
@@ -1518,9 +1646,7 @@
         #about-trigger {
           min-height: 400vh;
         }
-        .hero-visual {
-          display: none;
-        }
+
         .typing-container {
           position: relative;
           height: auto;
@@ -1537,11 +1663,50 @@
           width: 100%;
           opacity: 0;
         }
-        .hero-card {
-          height: 500px;
+
+        /* Roadmap: single column on tablet/mobile */
+        .roadmap-row {
+          flex-direction: row !important;
+          align-items: center !important;
+          min-height: unset;
+          padding-left: 2rem;
+          border-left: 1px solid var(--c-border);
+          margin-bottom: 0;
         }
-        .exp-grid {
-          grid-template-columns: 1fr;
+        .roadmap-node {
+          position: absolute;
+          left: 4.4%;
+          transform: none;
+          width: 32px;
+          height: 32px;
+          margin-left: -2rem;
+        }
+        .roadmap-card {
+          width: 100% !important;
+          margin: 2rem !important;
+          transform: translateX(0) !important;
+        }
+        .roadmap-card::after {
+          display: none;
+        }
+        .roadmap-row:nth-child(odd) .roadmap-card,
+        .roadmap-row:nth-child(even) .roadmap-card {
+          transform: translateY(20px);
+        }
+        .roadmap-row.rm-active .roadmap-card {
+          transform: translateY(0);
+        }
+        .roadmap-row.rm-exit .roadmap-card {
+          transform: translateY(20px);
+        }
+        .roadmap-svg {
+          display: none;
+        }
+        .roadmap {
+          padding-left: 1.5rem;
+        }
+        .roadmap-card {
+          margin-bottom: 2rem;
         }
         .slide-inner {
           display: flex;
@@ -1578,9 +1743,7 @@
         }
       }
 
-      /* =============================================
-         BREAKPOINT: 768px — Tablet portrait
-      ============================================= */
+      /* BREAKPOINT: 768px — Tablet portrait */
       @media (max-width: 768px) {
         :root {
           --space-xl: 4rem;
@@ -1593,6 +1756,18 @@
         }
         .container {
           padding: 0 1.25rem;
+        }
+        .nav-profile {
+          gap: 10px;
+        }
+
+        .nav-profile img {
+          width: 40px;
+          height: 40px;
+        }
+
+        .nav-profile h1 {
+          font-size: 0.95rem;
         }
         .hero {
           padding-top: 3.5rem;
@@ -1652,9 +1827,7 @@
           padding-top: 0;
           padding-bottom: 0;
         }
-        .hero-visual {
-          display: none;
-        }
+
         #about-trigger {
           min-height: 300vh;
         }
@@ -1674,11 +1847,11 @@
           width: 100%;
           opacity: 0;
         }
-        .exp-card {
-          padding: 1.5rem;
+        .rm-role {
+          font-size: 1.05rem;
         }
-        .exp-role {
-          font-size: 1.125rem;
+        .rm-desc {
+          font-size: 0.875rem;
         }
         .slide-panel {
           border-radius: var(--r-lg);
@@ -1697,7 +1870,6 @@
           order: 1;
           width: 100%;
           height: 100%;
-          background-image: url("path-ke-foto-anda.jpg");
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -1736,9 +1908,7 @@
         }
       }
 
-      /* =============================================
-         BREAKPOINT: 540px — Large phone
-      ============================================= */
+      /* BREAKPOINT: 540px — Large phone */
       @media (max-width: 540px) {
         :root {
           --space-xl: 3.5rem;
@@ -1838,9 +2008,7 @@
           padding-top: 0;
           padding-bottom: 0;
         }
-        .hero-visual {
-          display: none;
-        }
+
         #about-trigger {
           min-height: 250vh;
         }
@@ -1860,18 +2028,31 @@
           width: 100%;
           opacity: 0;
         }
-        .exp-grid {
-          gap: var(--space-md);
+        .roadmap-row {
+          padding-left: 1rem;
+          border-left: 1px solid var(--c-border);
+          margin-bottom: 0;
         }
-        .exp-card {
-          padding: 1.25rem;
-          border-radius: var(--r-lg);
+        .roadmap-node {
+          left: 3%;
+          width: 24px;
+          height: 24px;
+          margin-left: -1rem;
         }
-        .exp-role {
+        .roadmap-node span {
+          font-size: var(--fs-xs);
+        }
+        .roadmap-card {
+          margin: 1rem !important;
+        }
+        .rm-role {
           font-size: 1rem;
         }
-        .exp-desc {
+        .rm-desc {
           font-size: 0.8125rem;
+        }
+        .roadmap-card {
+          padding: 1.25rem 1.5rem;
         }
         .slide-panel {
           height: auto;
@@ -1934,9 +2115,7 @@
         }
       }
 
-      /* =============================================
-         BREAKPOINT: 375px — Small phone
-      ============================================= */
+      /* BREAKPOINT: 375px — Small phone */
       @media (max-width: 375px) {
         :root {
           --space-xl: 3rem;
@@ -2015,9 +2194,6 @@
           padding-top: 0;
           padding-bottom: 0;
         }
-        .hero-visual {
-          display: none;
-        }
         #about-trigger {
           min-height: 220vh;
         }
@@ -2037,19 +2213,27 @@
           width: 100%;
           opacity: 0;
         }
-        .exp-card {
-          padding: 1rem;
-          border-radius: var(--r-md);
+        .roadmap-node {
+          width: 20px;
+          height: 20px;
+          margin-left: -1%;
         }
-        .exp-role {
+        .roadmap-node span {
+          font-size: 10px;
+        }
+        .rm-role {
           font-size: 0.9375rem;
         }
-        .exp-desc {
+        .rm-desc {
           font-size: 0.75rem;
         }
-        .exp-tag {
+        .rm-tag {
           font-size: 0.6rem;
           padding: 3px 9px;
+        }
+        .roadmap-card {
+          padding: 1rem 1.25rem;
+          border-radius: var(--r-sm);
         }
         .slide-inner {
           flex-direction: column !important;
@@ -2137,7 +2321,10 @@
     <!-- NAV -->
     <nav id="navbar">
       <div class="nav-left">
-        <div class="nav-logo">KM <span>Portfolio</span></div>
+        <div class="nav-profile">
+          <img src="images/me2.png" alt="Khasnah" />
+          <span>Khasnah</span>
+        </div>
       </div>
       <ul class="nav-links">
         <li>
@@ -2172,13 +2359,18 @@
           <span class="t-en">Let's Talk</span><span class="arrow">↗</span>
           <span class="t-id">Hubungi →</span>
         </a>
-        <button
+        <!-- <button
           class="nav-hamburger"
           id="navHamburger"
           aria-label="Toggle menu"
         >
           <span></span><span></span><span></span>
-        </button>
+        </button> -->
+        <div class="nav-hamburger" id="navHamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </nav>
 
@@ -2341,17 +2533,6 @@
               </div>
             </div>
           </div>
-          <div class="hero-visual reveal reveal-delay-2">
-            <div class="hero-card">
-              <div class="hero-card-inner">
-                <!-- <div class="hero-card-orb hero-card-orb-1"></div>
-                <div class="hero-card-orb hero-card-orb-2"></div> -->
-                <div class="hero-card-name">Khasnah Maesaroh</div>
-                <div class="hero-card-role">UX/UI Designer · Web Developer</div>
-              </div>
-            </div>
-            <!-- <div class="hero-badge hero-badge-2">📍 Central Java, ID</div> -->
-          </div>
         </div>
       </div>
     </section>
@@ -2407,10 +2588,10 @@
                   >
                 </p>
                 <div class="slide-proj-tags">
-                  <span class="slide-proj-tag">Figma</span>
-                  <span class="slide-proj-tag">UX Research</span>
-                  <span class="slide-proj-tag">Prototyping</span>
                   <span class="slide-proj-tag">Design System</span>
+                  <span class="slide-proj-tag">UX Research</span>
+                  <span class="slide-proj-tag">UI Design</span>
+                  <span class="slide-proj-tag">Prototyping</span>
                 </div>
               </div>
             </div>
@@ -2427,29 +2608,22 @@
               <div class="slide-text-side">
                 <div class="slide-proj-type">
                   <div class="slide-proj-type-dot"></div>
-                  <span class="t-en">UI/UX Design</span
-                  ><span class="t-id">Desain UI/UX</span>
+                  <span class="t-en">UI/UX Design</span>
                 </div>
                 <div class="slide-proj-title">
                   <span class="t-en">Library<br />Website</span>
-                  <span class="t-id">Website<br />Perpustakaan</span>
                 </div>
                 <p class="slide-proj-desc">
                   <span class="t-en"
-                    >Crafted a high-fidelity library management UI for a school,
-                    streamlining book search, borrowing, and reservation with a
-                    consistent visual style guide.</span
-                  >
-                  <span class="t-id"
-                    >Membuat antarmuka manajemen perpustakaan berkualitas tinggi
-                    untuk sekolah, mempermudah pencarian, peminjaman, dan
-                    reservasi buku dengan panduan gaya visual yang
-                    konsisten.</span
+                    >Designed a high-fidelity library management interface for
+                    students, simplifying book discovery, borrowing, and
+                    reservation through a clean and consistent user
+                    experience.</span
                   >
                 </p>
                 <div class="slide-proj-tags">
-                  <span class="slide-proj-tag">Figma</span>
                   <span class="slide-proj-tag">Wireframing</span>
+                  <span class="slide-proj-tag">User Flow</span>
                   <span class="slide-proj-tag">UI Design</span>
                 </div>
               </div>
@@ -2467,23 +2641,17 @@
               <div class="slide-text-side">
                 <div class="slide-proj-type">
                   <div class="slide-proj-type-dot"></div>
-                  <span class="t-en">UI/UX Design</span
-                  ><span class="t-id">Desain UI/UX</span>
+                  <span class="t-en">UI/UX Design</span>
                 </div>
                 <div class="slide-proj-title">
                   <span class="t-en">Public Service<br />Portal</span>
-                  <span class="t-id">Portal Pelayanan<br />Publik</span>
                 </div>
                 <p class="slide-proj-desc">
                   <span class="t-en"
-                    >Reimagined the public-facing portal for a government
-                    institution, simplifying service information architecture
-                    and crafting a modern, accessible interface.</span
-                  >
-                  <span class="t-id"
-                    >Mendesain ulang portal layanan publik suatu institusi
-                    pemerintah, menyederhanakan arsitektur informasi layanan
-                    dengan antarmuka yang modern dan mudah diakses.</span
+                    >Redesigned a government public service portal by improving
+                    information architecture, simplifying navigation flow, and
+                    creating a more accessible and user-friendly interface for
+                    citizens.</span
                   >
                 </p>
                 <div class="slide-proj-tags">
@@ -2506,25 +2674,18 @@
               <div class="slide-text-side">
                 <div class="slide-proj-type">
                   <div class="slide-proj-type-dot"></div>
-                  <span class="t-en">UI/UX Design</span
-                  ><span class="t-id">Desain UI/UX</span>
+                  <span class="t-en">UI/UX Design</span>
                 </div>
                 <div class="slide-proj-title">Fintrax App</div>
                 <p class="slide-proj-desc">
                   <span class="t-en"
-                    >Designed wireframes and interactive prototypes for a
-                    budgeting and financial planning app, centering
-                    user-friendly financial insights and clear data
-                    visualization.</span
-                  >
-                  <span class="t-id"
-                    >Merancang wireframe dan prototipe interaktif untuk aplikasi
-                    penganggaran dan perencanaan keuangan dengan wawasan
-                    keuangan yang ramah pengguna.</span
+                    >Created a financial management app prototype that helps
+                    users monitor spending habits, manage budgets, and
+                    understand financial insights through clean and intuitive
+                    interfaces.</span
                   >
                 </p>
                 <div class="slide-proj-tags">
-                  <span class="slide-proj-tag">Figma</span>
                   <span class="slide-proj-tag">Wireframing</span>
                   <span class="slide-proj-tag">UI Design</span>
                   <span class="slide-proj-tag">Data Viz</span>
@@ -2548,29 +2709,22 @@
               <div class="slide-text-side">
                 <div class="slide-proj-type">
                   <div class="slide-proj-type-dot"></div>
-                  <span class="t-en">UI/UX Design</span
-                  ><span class="t-id">Desain UI/UX</span>
+                  <span class="t-en">UI/UX Design</span>
                 </div>
                 <div class="slide-proj-title">
                   <span class="t-en">Digital Literacy<br />Platform</span>
-                  <span class="t-id">Platform Literasi<br />Digital</span>
                 </div>
                 <p class="slide-proj-desc">
                   <span class="t-en"
-                    >Architected information structure and gamification
-                    mechanics for a digital literacy app, boosting engagement
-                    through interactive content and achievement loops.</span
-                  >
-                  <span class="t-id"
-                    >Merancang struktur informasi dan mekanika gamifikasi untuk
-                    aplikasi literasi digital, meningkatkan keterlibatan melalui
-                    konten interaktif dan siklus pencapaian.</span
+                    >Created a digital literacy app concept with structured
+                    information architecture and gamification features to
+                    encourage interactive and engaging learning
+                    experiences.</span
                   >
                 </p>
                 <div class="slide-proj-tags">
-                  <span class="slide-proj-tag">Figma</span>
                   <span class="slide-proj-tag">Gamification</span>
-                  <span class="slide-proj-tag">UX Research</span>
+                  <span class="slide-proj-tag">User Flow</span>
                   <span class="slide-proj-tag">UI Design</span>
                 </div>
               </div>
@@ -2591,28 +2745,23 @@
               <div class="slide-text-side">
                 <div class="slide-proj-type">
                   <div class="slide-proj-type-dot"></div>
-                  <span class="t-en">UI/UX Design</span
-                  ><span class="t-id">Desain UI/UX</span>
+                  <span class="t-en">UI/UX Design</span>
                 </div>
                 <div class="slide-proj-title">
                   <span class="t-en">Localezat<br />Culinary Finder</span>
-                  <span class="t-id">Lokalezat<br />Pencari Kuliner</span>
                 </div>
                 <p class="slide-proj-desc">
                   <span class="t-en"
-                    >Conducted UX research with interviews and surveys to
-                    identify pain points, then designed the UI for a local
-                    culinary discovery platform prototype.</span
-                  >
-                  <span class="t-id"
-                    >Melakukan riset UX dengan wawancara dan survei untuk
-                    mengidentifikasi pain points, kemudian mendesain UI
-                    prototipe platform penemuan kuliner lokal.</span
+                    >Collected user insights through interviews and surveys,
+                    identified key pain points, created user personas and
+                    journey maps, and designed a prototype solution for local
+                    culinary exploration.</span
                   >
                 </p>
                 <div class="slide-proj-tags">
-                  <span class="slide-proj-tag">UX Research</span>
-                  <span class="slide-proj-tag">Interviews</span>
+                  <span class="slide-proj-tag">User Research</span>
+                  <span class="slide-proj-tag">Journey Mapping</span>
+                  <span class="slide-proj-tag">Wireframing</span>
                   <span class="slide-proj-tag">Prototyping</span>
                 </div>
               </div>
@@ -2622,131 +2771,158 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
+    <!-- EXPERIENCE ROADMAP -->
     <section class="section" id="experience">
       <div class="container experience">
         <div class="exp-label reveal">
-          <span class="t-en">Experience</span
-          ><span class="t-id">Pengalaman</span>
+          <span class="t-en">Experience</span>
         </div>
         <h2 class="section-title reveal reveal-delay-1">
           <span class="t-en">Where I've <em>worked</em></span>
-          <span class="t-id">Tempat saya<br /><em>berkarya</em></span>
         </h2>
-        <div style="height: var(--space-md)"></div>
-        <div class="exp-grid">
-          <div class="exp-card exp-card--accent reveal">
-            <div class="exp-period">
-              <div class="exp-period-bar"></div>
-              <span class="t-en">July 2025 — Present</span
-              ><span class="t-id">Juli 2025 — Sekarang</span>
+
+        <div class="roadmap" id="roadmapWrap">
+          <svg class="roadmap-svg" id="roadmapSvg" aria-hidden="true">
+            <path class="roadmap-path" id="roadmapPathBg" />
+            <path class="roadmap-path-progress" id="roadmapPathFg" />
+          </svg>
+
+          <!-- Stop 1: Freelance (current) -->
+          <div class="roadmap-row rm-accent" data-index="0">
+            <div class="roadmap-card">
+              <div class="rm-period">
+                <span class="t-en">Jul 2025 — Present</span>
+                <span class="t-id">Jul 2025 — Sekarang</span>
+              </div>
+              <div class="rm-role">
+                <span class="t-en"
+                  >Freelance Web Developer & UX/UI Designer</span
+                >
+                <span class="t-id"
+                  >Freelance Web Developer & UX/UI Designer</span
+                >
+              </div>
+              <div class="rm-company">
+                <span class="t-en">Self-Employed · Remote</span>
+                <span class="t-id">Pekerja Lepas · Remote</span>
+              </div>
+              <div class="rm-desc">
+                <span class="t-en"
+                  >Building responsive websites and design systems for clients
+                  across multiple industries. Handling full product lifecycle
+                  from wireframes to deployment.</span
+                >
+                <span class="t-id"
+                  >Membangun website responsif dan design system untuk klien
+                  dari berbagai industri. Menangani siklus produk penuh dari
+                  wireframe hingga deployment.</span
+                >
+              </div>
+              <span class="rm-tag">
+                <span class="t-en">Currently Active</span>
+                <span class="t-id">Aktif Sekarang</span>
+              </span>
             </div>
-            <div class="exp-role">
-              <span class="t-en"
-                >Freelance Web Developer<br />& UX/UI Designer</span
-              >
-              <span class="t-id"
-                >Freelance Web Developer<br />& UX/UI Designer</span
-              >
-            </div>
-            <div class="exp-company">
-              <span class="t-en">Self-Employed · Remote</span
-              ><span class="t-id">Pekerja Lepas · Remote</span>
-            </div>
-            <div class="exp-desc">
-              <span class="t-en"
-                >Building responsive websites and design systems for clients
-                across multiple industries. Handling full product lifecycle from
-                wireframes to deployment.</span
-              >
-              <span class="t-id"
-                >Membangun website responsif dan design system untuk klien dari
-                berbagai industri. Menangani siklus produk penuh dari wireframe
-                hingga deployment.</span
-              >
-            </div>
-            <span class="exp-tag"
-              ><span class="t-en">Currently Active</span
-              ><span class="t-id">Aktif Sekarang</span></span
-            >
-          </div>
-          <div class="exp-card reveal reveal-delay-1">
-            <div class="exp-period">
-              <div class="exp-period-bar"></div>
-              <span class="t-en">Sept 2024 — Dec 2024</span
-              ><span class="t-id">Sept 2024 — Des 2024</span>
-            </div>
-            <div class="exp-role">
-              <span class="t-en">Programmer Intern</span
-              ><span class="t-id">Magang Programmer</span>
-            </div>
-            <div class="exp-company">Dinas Kesehatan Kota Tegal</div>
-            <div class="exp-desc">
-              <span class="t-en"
-                >Developed two web-based systems using Laravel and MySQL —
-                digitizing administrative processes and internship registration
-                workflows that were previously manual.</span
-              >
-              <span class="t-id"
-                >Mengembangkan dua sistem berbasis web menggunakan PHP dan MySQL
-                — mendigitalisasi proses administrasi dan alur pendaftaran
-                magang yang sebelumnya manual.</span
-              >
+            <div class="roadmap-node" aria-hidden="true">
+              <span>04</span>
             </div>
           </div>
-          <div class="exp-card reveal">
-            <div class="exp-period">
-              <div class="exp-period-bar"></div>
-              <span class="t-en">Oct 2023 — Jan 2024</span
-              ><span class="t-id">Okt 2023 — Jan 2024</span>
+
+          <!-- Stop 2: Internship -->
+          <div class="roadmap-row" data-index="1">
+            <div class="roadmap-card">
+              <div class="rm-period">
+                <span class="t-en">Sept 2024 — Dec 2024</span>
+                <span class="t-id">Sep 2024 — Des 2024</span>
+              </div>
+              <div class="rm-role">
+                <span class="t-en">Programmer Intern</span>
+                <span class="t-id">Magang Programmer</span>
+              </div>
+              <div class="rm-company">Dinas Kesehatan Kota Tegal</div>
+              <div class="rm-desc">
+                <span class="t-en"
+                  >Developed two web-based systems using Laravel and MySQL,
+                  digitizing administrative processes and internship
+                  registration workflows that were previously manual.</span
+                >
+                <span class="t-id"
+                  >Mengembangkan dua sistem berbasis web menggunakan PHP dan
+                  MySQL — mendigitalisasi proses administrasi dan alur
+                  pendaftaran magang yang sebelumnya manual.</span
+                >
+              </div>
             </div>
-            <div class="exp-role">
-              <span class="t-en"
-                >MSIB Participant<br />Web Dev & UI/UX Design</span
-              >
-              <span class="t-id">Peserta MSIB<br />Web Dev & UI/UX Design</span>
-            </div>
-            <div class="exp-company">Celerates · Acceleration Program</div>
-            <div class="exp-desc">
-              <span class="t-en"
-                >6-month intensive: Full-Stack Development (JavaScript,
-                React.js, Express.js, Node.js) and Design Thinking. Co-built
-                Fintrax and designed Literasik prototype in Figma.</span
-              >
-              <span class="t-id"
-                >Program intensif 6 bulan: Full-Stack Development (JavaScript,
-                React.js, Express.js, Node.js) dan Design Thinking. Bersama tim
-                mengembangkan Fintrax dan merancang prototipe Literasik di
-                Figma.</span
-              >
+            <div class="roadmap-node" aria-hidden="true">
+              <span>03</span>
             </div>
           </div>
-          <div class="exp-card reveal reveal-delay-1">
-            <div class="exp-period">
-              <div class="exp-period-bar"></div>
-              <span class="t-en">Sept 2022 — Aug 2025</span
-              ><span class="t-id">Sept 2022 — Agu 2025</span>
+
+          <!-- Stop 3: MSIB -->
+          <div class="roadmap-row" data-index="2">
+            <div class="roadmap-card">
+              <div class="rm-period">
+                <span class="t-en">Oct 2023 — Jan 2024</span>
+                <span class="t-id">Okt 2023 — Jan 2024</span>
+              </div>
+              <div class="rm-role">
+                <span class="t-en"
+                  >MSIB Participant — Web Dev & UI/UX Design</span
+                >
+                <span class="t-id">Peserta MSIB — Web Dev & UI/UX Design</span>
+              </div>
+              <div class="rm-company">Celerates · Acceleration Program</div>
+              <div class="rm-desc">
+                <span class="t-en"
+                  >6-month intensive: Full-Stack Development (JavaScript,
+                  React.js, Express.js, Node.js) and Design Thinking. Co-built
+                  Fintrax and designed Literasik prototype in Figma.</span
+                >
+                <span class="t-id"
+                  >Program intensif 6 bulan: Full-Stack Development (JavaScript,
+                  React.js, Express.js, Node.js) dan Design Thinking. Bersama
+                  tim mengembangkan Fintrax dan merancang prototipe Literasik di
+                  Figma.</span
+                >
+              </div>
             </div>
-            <div class="exp-role">
-              <span class="t-en">D3 Information Systems</span
-              ><span class="t-id">D3 Sistem Informasi</span>
+            <div class="roadmap-node" aria-hidden="true">
+              <span>02</span>
             </div>
-            <div class="exp-company">Universitas Bina Sarana Informatika</div>
-            <div class="exp-desc">
-              <span class="t-en"
-                >Information Systems graduate with a focus on designing
-                web-based solutions. Final thesis examined how digital systems
-                can streamline and improve administrative workflows.</span
-              >
-              <span class="t-id"
-                >Lulusan Sistem Informasi dengan fokus pada perancangan solusi
-                berbasis web. Skripsi mengkaji bagaimana sistem digital dapat
-                menyederhanakan dan meningkatkan efisiensi alur kerja
-                administrasi.</span
-              >
+          </div>
+
+          <!-- Stop 4: Education -->
+          <div class="roadmap-row" data-index="3">
+            <div class="roadmap-card">
+              <div class="rm-period">
+                <span class="t-en">Sept 2022 — Aug 2025</span>
+                <span class="t-id">Sep 2022 — Agu 2025</span>
+              </div>
+              <div class="rm-role">
+                <span class="t-en">D3 Information Systems</span>
+                <span class="t-id">D3 Sistem Informasi</span>
+              </div>
+              <div class="rm-company">Universitas Bina Sarana Informatika</div>
+              <div class="rm-desc">
+                <span class="t-en"
+                  >Information Systems graduate with a focus on designing
+                  web-based solutions. Final thesis examined how digital systems
+                  can streamline and improve administrative workflows.</span
+                >
+                <span class="t-id"
+                  >Lulusan Sistem Informasi dengan fokus pada perancangan solusi
+                  berbasis web. Skripsi mengkaji bagaimana sistem digital dapat
+                  menyederhanakan dan meningkatkan efisiensi alur kerja
+                  administrasi.</span
+                >
+              </div>
+            </div>
+            <div class="roadmap-node" aria-hidden="true">
+              <span>01</span>
             </div>
           </div>
         </div>
+        <!-- end .roadmap -->
       </div>
     </section>
 
@@ -2762,7 +2938,7 @@
           ><span class="t-id">Mari Berkolaborasi</span>
         </div>
         <h2 class="contact-heading reveal reveal-delay-1">
-          <span class="t-en">Got a project<br />in <span>mind?</span></span>
+          <span class="t-en">Got a project<br />in <em>mind?</em></span>
           <span class="t-id"
             >Punya proyek<br />yang <span>ingin dibangun?</span></span
           >
@@ -2812,7 +2988,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
-      /* === MOBILE NAV === */
+      /* MOBILE NAV */
       const hamburger = document.getElementById("navHamburger");
       const mobileDrawer = document.getElementById("navMobileDrawer");
 
@@ -2832,7 +3008,7 @@
         if (e.target === mobileDrawer) closeMobileNav();
       });
 
-      /* === LANGUAGE SYSTEM === */
+      /* LANGUAGE SYSTEM */
       function setLang(lang) {
         document.body.classList.remove("lang-en", "lang-id");
         document.body.classList.add("lang-" + lang);
@@ -2853,7 +3029,7 @@
         if (lang === "id") setLang("id");
       })();
 
-      /* === CUSTOM CURSOR (desktop only) === */
+      /* CUSTOM CURSOR (desktop only) */
       const isTouchDevice = window.matchMedia(
         "(hover: none) and (pointer: coarse)",
       ).matches;
@@ -2893,7 +3069,7 @@
           });
       }
 
-      /* === NAV SCROLL === */
+      /* NAV SCROLL */
       const navbar = document.getElementById("navbar");
       window.addEventListener("scroll", () =>
         navbar.classList.toggle("scrolled", scrollY > 60),
@@ -2912,7 +3088,7 @@
         },
       });
 
-      /* === TICKER === */
+      /* TICKER */
       const tickerItems = [
         "Laravel",
         "Figma",
@@ -2934,7 +3110,7 @@
         )
         .join("");
 
-      /* === STACKING SLIDE PANELS === */
+      /* STACKING SLIDE PANELS */
       document.addEventListener("DOMContentLoaded", function () {
         const TOP_OFFSET = 100;
 
@@ -3015,7 +3191,7 @@
           }, 400);
         });
       });
-      /* === SCROLL REVEAL === */
+      /* SCROLL REVEAL */
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -3031,7 +3207,7 @@
         .querySelectorAll(".reveal")
         .forEach((el) => observer.observe(el));
 
-      /* === INTERACTIVE HERO GRID === */
+      /* INTERACTIVE HERO GRID */
       document.addEventListener("DOMContentLoaded", () => {
         const grid = document.getElementById("interactiveGrid");
         const boxSize = 72;
@@ -3057,7 +3233,7 @@
           gridResizeTimer = setTimeout(createGrid, 200);
         });
       });
-      /* === DRAGGABLE HERO NAME === */
+      /* DRAGGABLE HERO NAME */
       (function () {
         if (window.matchMedia("(hover: none) and (pointer: coarse)").matches)
           return;
@@ -3169,7 +3345,6 @@
 
           lastMessageIndex = randomIndex;
           const msg = messages[randomIndex];
-          // ----------------------------
 
           setTimeout(() => typeWriter(msg, 0, onFinishTyping), 300);
         }
@@ -3288,7 +3463,147 @@
         });
       })();
 
-      /* === ABOUT TYPING ANIMATION === */
+      /* EXPERIENCE ROADMAP ANIMATION */
+      (function initRoadmap() {
+        const wrap = document.getElementById("roadmapWrap");
+        const svgEl = document.getElementById("roadmapSvg");
+        const pathBg = document.getElementById("roadmapPathBg");
+        const pathFg = document.getElementById("roadmapPathFg");
+        const rows = wrap
+          ? Array.from(wrap.querySelectorAll(".roadmap-row"))
+          : [];
+
+        if (!wrap || !rows.length) return;
+
+        /* build winding SVG path through node centres */
+        function buildPath() {
+          const isMobile = window.innerWidth <= 900;
+          if (isMobile) return; // SVG hidden on mobile
+
+          const wrapRect = wrap.getBoundingClientRect();
+          const nodes = rows.map((r) => r.querySelector(".roadmap-node"));
+
+          const points = nodes.map((n) => {
+            const nr = n.getBoundingClientRect();
+            return {
+              x: nr.left + nr.width / 2 - wrapRect.left,
+              y: nr.top + nr.height / 2 - wrapRect.top,
+            };
+          });
+
+          if (points.length < 2) return;
+
+          /* Build smooth cubic bezier through all points */
+          let d = `M ${points[0].x} ${points[0].y}`;
+          for (let i = 0; i < points.length - 1; i++) {
+            const p0 = points[i];
+            const p1 = points[i + 1];
+            const midY = (p0.y + p1.y) / 2;
+            /* S-curve: first control point goes further out horizontally */
+            const cp1x = p0.x + (p1.x - p0.x) * 0.0;
+            const cp2x = p1.x + (p0.x - p1.x) * 0.0;
+            d += ` C ${cp1x} ${midY}, ${cp2x} ${midY}, ${p1.x} ${p1.y}`;
+          }
+
+          [pathBg, pathFg].forEach((p) => {
+            p.setAttribute("d", d);
+          });
+
+          /* measure total path length */
+          const len = pathBg.getTotalLength();
+          [pathBg, pathFg].forEach((p) => {
+            p.style.strokeDasharray = len;
+            p.style.strokeDashoffset = len;
+          });
+
+          return { points, len };
+        }
+
+        let pathData = null;
+
+        /* scroll-driven path reveal */
+        function updatePathProgress() {
+          if (!pathData || window.innerWidth <= 900) return;
+          const { len } = pathData;
+
+          const wRect = wrap.getBoundingClientRect();
+          const vh = window.innerHeight;
+          // progress: 0 when top of wrap at bottom of screen, 1 when bottom of wrap at top
+          const total = wRect.height + vh;
+          const done = vh - wRect.top;
+          const prog = Math.max(0, Math.min(1, done / total));
+
+          pathBg.style.strokeDashoffset = len * (1 - Math.min(prog + 0.05, 1));
+          pathFg.style.strokeDashoffset = len * (1 - prog);
+        }
+
+        /* per-row active/exit classes via IntersectionObserver */
+        function observeRows() {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                const row = entry.target;
+                if (entry.isIntersecting) {
+                  // entering — stagger by index
+                  const idx = parseInt(row.dataset.index) || 0;
+                  setTimeout(() => {
+                    row.classList.remove("rm-exit");
+                    row.classList.add("rm-active");
+                  }, idx * 80);
+                } else {
+                  // leaving — detect direction
+                  const rect = entry.boundingClientRect;
+                  if (rect.top > 0) {
+                    // scrolled back up past top → exit upward
+                    row.classList.remove("rm-active");
+                    row.classList.add("rm-exit");
+                  } else {
+                    // scrolled past bottom → exit downward (fade out same direction)
+                    row.classList.remove("rm-active");
+                    row.classList.add("rm-exit");
+                  }
+                  // small delay to let transition play, then clean rm-exit
+                  setTimeout(() => row.classList.remove("rm-exit"), 600);
+                }
+              });
+            },
+            {
+              threshold: 0.25,
+              rootMargin: "0px 0px -60px 0px",
+            },
+          );
+
+          rows.forEach((r) => io.observe(r));
+        }
+
+        /*  init sequence  */
+        function init() {
+          pathData = buildPath();
+          updatePathProgress();
+          observeRows();
+        }
+
+        // Wait for fonts/layout to settle
+        if (document.readyState === "complete") {
+          setTimeout(init, 100);
+        } else {
+          window.addEventListener("load", () => setTimeout(init, 100));
+        }
+
+        window.addEventListener("scroll", updatePathProgress, {
+          passive: true,
+        });
+        window.addEventListener(
+          "resize",
+          () => {
+            pathData = buildPath();
+            updatePathProgress();
+          },
+          { passive: true },
+        );
+      })();
+
+      /* ABOUT TYPING ANIMATION */
       const typingCursor = document.querySelector(".owner-cursor");
       const slidesData = [
         {
