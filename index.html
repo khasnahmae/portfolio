@@ -564,14 +564,15 @@
           transform: translateY(-20px);
         }
       }
-
       .hero-ticker {
         position: relative;
         z-index: 1;
         border-top: 1px solid var(--c-border);
         padding: 1.25rem 0;
         overflow: hidden;
+        width: 100%; /* Memastikan kontainer utama memenuhi layar */
         display: flex;
+
         mask-image: linear-gradient(
           90deg,
           transparent,
@@ -579,22 +580,39 @@
           black 90%,
           transparent
         );
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          black 10%,
+          black 90%,
+          transparent
+        );
       }
+
       .hero-ticker-track {
         display: flex;
         gap: 3rem;
         align-items: center;
-        animation: ticker 20s linear infinite;
         white-space: nowrap;
+
+        /* KUNCI UTAMA: Memaksa track memanjang keluar layar mengikuti teks asli */
+        width: max-content;
+        flex-shrink: 0;
+
+        /* Jalankan animasi */
+        animation: ticker 30s linear infinite;
       }
+
       @keyframes ticker {
         0% {
-          transform: translateX(0);
+          transform: translate3d(0, 0, 0);
         }
         100% {
-          transform: translateX(-50%);
+          /* Menggeser pas setengah dari total track (pas selesai 1 batch item) */
+          transform: translate3d(-50%, 0, 0);
         }
       }
+
       .hero-ticker-item {
         display: flex;
         align-items: center;
@@ -603,7 +621,11 @@
         color: var(--c-ink-60);
         letter-spacing: 0.05em;
         text-transform: uppercase;
+
+        /* Mencegah teks gepeng atau menyusut akibat flexbox parent */
+        flex-shrink: 0;
       }
+
       .hero-ticker-dot {
         width: 5px;
         height: 5px;
@@ -612,31 +634,26 @@
         flex-shrink: 0;
       }
 
-      /* STATS */
-      .stats-band {
-        background: var(--c-accent-dim);
-        color: var(--c-white);
-        padding: var(--space-lg) 0;
-      }
       .stats-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 1px;
+        gap: var(--space-sm);
         background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: var(--r-lg);
         overflow: hidden;
+        width: 100%;
       }
       .stat-item {
         padding: 2rem 1.5rem;
         background: var(--c-accent-dim);
+        border-radius: var(--r-lg);
         text-align: center;
         transition: background var(--dur-fast);
+        flex: 1;
       }
 
       .stat-number {
         font-family: var(--font-display);
-        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-size: var(--fs-h2);
         font-weight: 800;
         line-height: 1;
         color: var(--c-white);
@@ -729,8 +746,8 @@
         text-align: center;
       }
       #about-sticky-container {
-        padding-top: var(--space-lg);
-        padding-bottom: var(--space-lg);
+        /* padding-top: var(--space-lg);
+        padding-bottom: var(--space-lg); */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -772,7 +789,7 @@
       }
       .typing-container {
         position: relative;
-        height: 380px; /* overridden per breakpoint */
+        height: 250px; /* overridden per breakpoint */
         overflow: visible;
         width: 100%;
       }
@@ -1520,9 +1537,7 @@
           max-width: 420px;
           font-size: 1rem;
         }
-        .stats-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
+
         .about-grid {
           grid-template-columns: 1.2fr 1fr;
           gap: var(--space-md);
@@ -1601,9 +1616,7 @@
           flex-wrap: wrap;
           justify-content: center;
         }
-        .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
+
         .section-title {
           font-size: 3.5rem;
           letter-spacing: -0.02em;
@@ -1763,6 +1776,13 @@
           align-items: center;
           gap: 1.25rem;
         }
+        .stats-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0.75rem;
+        }
+        .stat-item {
+          padding: 1.75rem 1rem;
+        }
       }
 
       /* BREAKPOINT: 768px — Tablet portrait */
@@ -1812,13 +1832,7 @@
         .hero-ticker-item {
           font-size: 0.75rem;
         }
-        .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 0;
-        }
-        .stat-item {
-          padding: 1.5rem 1rem;
-        }
+
         .section-title {
           font-size: 3rem;
           margin-bottom: 1.5rem;
@@ -1928,6 +1942,14 @@
         .drag-to-move-label {
           display: none;
         }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.75rem;
+        }
+        .stat-item {
+          padding: 1.5rem 1rem;
+          border-radius: var(--r-md);
+        }
       }
 
       /* BREAKPOINT: 540px — Large phone */
@@ -1980,22 +2002,7 @@
           padding: 0.65rem 1.25rem;
           font-size: 0.8125rem;
         }
-        .stats-band {
-          padding: 2rem 0;
-        }
-        .stats-grid {
-          grid-template-columns: 1fr 1fr;
-          border-radius: var(--r-md);
-        }
-        .stat-number {
-          font-size: clamp(1.5rem, 8vw, 2.25rem);
-        }
-        .stat-label {
-          font-size: 0.65rem;
-        }
-        .stat-item {
-          padding: 1.25rem 0.75rem;
-        }
+
         .section-title {
           font-size: 2.5rem;
           line-height: 1.2;
@@ -2133,6 +2140,17 @@
           width: 36px;
           height: 36px;
         }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.625rem;
+        }
+        .stat-item {
+          padding: 1.25rem 0.875rem;
+          border-radius: var(--r-md);
+        }
+        .stat-number {
+          font-size: clamp(1.5rem, 6vw, 2rem);
+        }
       }
 
       /* BREAKPOINT: 375px — Small phone */
@@ -2183,6 +2201,10 @@
         }
         .stat-item {
           padding: 1rem 0.5rem;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 0.5rem;
         }
         .section-title {
           font-size: 2.2rem;
@@ -2510,42 +2532,6 @@
       </div>
     </section>
 
-    <!-- STATS -->
-    <section class="stats-band">
-      <div class="container">
-        <div class="stats-grid reveal">
-          <div class="stat-item">
-            <div class="stat-number">2</div>
-            <div class="stat-label">
-              <span class="t-en">Year Experience</span
-              ><span class="t-id">Tahun Pengalaman</span>
-            </div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">8+</div>
-            <div class="stat-label">
-              <span class="t-en">Case Studies</span
-              ><span class="t-id">Studi Kasus</span>
-            </div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">5+</div>
-            <div class="stat-label">
-              <span class="t-en">Real Client Projects</span
-              ><span class="t-id">Proyek Klien Nyata</span>
-            </div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number">2</div>
-            <div class="stat-label">
-              <span class="t-en">Certifications</span
-              ><span class="t-id">Sertifikasi</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ABOUT -->
     <section class="section" id="about-trigger">
       <div class="container about" id="about-sticky-container">
@@ -2557,6 +2543,36 @@
             <div class="about-text-wrapper typing-container">
               <div class="typing-slides">
                 <span class="about-text typing-slide" id="target-1"></span>
+              </div>
+            </div>
+          </div>
+          <div class="stats-grid reveal">
+            <div class="stat-item">
+              <div class="stat-number">2</div>
+              <div class="stat-label">
+                <span class="t-en">Year Experience</span
+                ><span class="t-id">Tahun Pengalaman</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">8+</div>
+              <div class="stat-label">
+                <span class="t-en">Case Studies</span
+                ><span class="t-id">Studi Kasus</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">5+</div>
+              <div class="stat-label">
+                <span class="t-en">Real Projects</span
+                ><span class="t-id">Proyek Klien Nyata</span>
+              </div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">2</div>
+              <div class="stat-label">
+                <span class="t-en">Certifications</span
+                ><span class="t-id">Sertifikasi</span>
               </div>
             </div>
           </div>
